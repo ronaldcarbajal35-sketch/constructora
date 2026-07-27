@@ -1,0 +1,81 @@
+---
+// Navbar sticky component
+---
+
+<nav
+    class="sticky top-0 z-50 bg-navy-800 text-white shadow-lg transition-all duration-300"
+>
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+        <!-- Logo -->
+        <a
+            href="/"
+            class="text-2xl font-bold tracking-wider flex items-center gap-2"
+        >
+            <img src="/images/logo.png" alt="Constructora Salcedo Logo" class="h-12 w-auto" />
+            <!-- <span>CONSTRUCTORA SALCEDO</span> -->
+        </a>
+
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex items-center space-x-8 font-medium">
+            <a href="/#inicio" class="hover:text-brick-500 transition-colors"
+                >Inicio</a
+            >
+            <a href="/#servicios" class="hover:text-brick-500 transition-colors"
+                >Servicios de Obra</a
+            >
+            <a href="/#academia" class="hover:text-brick-500 transition-colors"
+                >Cursos & Capacitación</a
+            >
+            <a href="/#contacto" class="hover:text-brick-500 transition-colors"
+                >Contacto</a
+            >
+        </div>
+
+        <!-- CTA Button -->
+        <a
+            href="https://wa.me/51977715469"
+            target="_blank"
+            class="hidden md:inline-flex items-center gap-2 bg-brick-500 hover:bg-brick-600 text-white px-5 py-2 rounded-full font-semibold transition-transform transform hover:scale-105 shadow-md"
+        >
+            <i class="fa-brands fa-whatsapp text-xl"></i>
+            WhatsApp Directo
+        </a>
+
+        <!-- Mobile Menu Button -->
+        <button id="mobile-menu-btn" class="md:hidden text-2xl focus:outline-none">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+    </div>
+
+    <!-- Mobile Menu Container -->
+    <div id="mobile-menu" class="hidden md:hidden bg-navy-900 border-t border-navy-700">
+        <div class="container mx-auto px-6 py-4 flex flex-col space-y-4">
+            <a href="/#inicio" class="mobile-link hover:text-brick-500 transition-colors">Inicio</a>
+            <a href="/#servicios" class="mobile-link hover:text-brick-500 transition-colors">Servicios de Obra</a>
+            <a href="/#academia" class="mobile-link hover:text-brick-500 transition-colors">Cursos & Capacitación</a>
+            <a href="/#contacto" class="mobile-link hover:text-brick-500 transition-colors">Contacto</a>
+            <a href="https://wa.me/51977715469" target="_blank" class="text-brick-500 font-semibold">
+                <i class="fa-brands fa-whatsapp mr-2"></i>WhatsApp Directo
+            </a>
+        </div>
+    </div>
+</nav>
+
+<script>
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+
+    if (mobileMenuBtn && mobileMenu) {
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close menu when a link is clicked
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+    }
+</script>

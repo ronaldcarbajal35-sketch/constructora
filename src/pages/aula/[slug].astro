@@ -1,0 +1,112 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const cursos = await getCollection('cursos');
+  return cursos.map(entry => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { title, syllabus } = entry.data;
+
+// Flatten the syllabus to get a linear list of lessons for the sidebar
+// In a real app, these would probably have their own IDs or URLs
+let lessonIndex = 1;
+---
+
+<Layout title={`Aula Virtual - ${title}`} description="Aula Virtual de Constructora Salcedo">
+    <div class="flex flex-col h-screen bg-navy-900 text-white overflow-hidden">
+        <!-- Aula Header -->
+        <header class="bg-navy-800 border-b border-navy-700 px-6 py-4 flex justify-between items-center z-20 shrink-0">
+            <div class="flex items-center gap-4">
+                <a href={`/cursos/${entry.slug}`} class="text-gray-400 hover:text-white transition-colors">
+                    <i class="fa-solid fa-arrow-left"></i> Volver al curso
+                </a>
+                <h1 class="font-bold text-lg hidden md:block truncate max-w-xl">{title}</h1>
+            </div>
+            <div class="flex items-center gap-4">
+                <button class="text-gray-300 hover:text-white">
+                    <i class="fa-solid fa-circle-question"></i> Ayuda
+                </button>
+                <div class="w-8 h-8 rounded-full bg-brick-500 flex items-center justify-center font-bold">
+                    U
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Workspace -->
+        <div class="flex flex-1 overflow-hidden relative">
+            <!-- Video Area (Left) -->
+            <main class="flex-1 flex flex-col overflow-y-auto bg-black">
+                <div class="w-full aspect-video bg-black flex items-center justify-center relative group">
+                    <!-- Placeholder for Video Player -->
+                    <div class="text-center">
+                        <i class="fa-solid fa-play-circle text-6xl text-brick-500 opacity-80 group-hover:opacity-100 transition-opacity cursor-pointer"></i>
+                        <p class="mt-4 text-gray-400 font-medium tracking-wide">Reproductor de Video</p>
+                    </div>
+                </div>
+                
+                <div class="p-8 max-w-4xl mx-auto w-full">
+                    <h2 class="text-2xl font-bold mb-4">{title}</h2>
+                    <div class="flex items-center gap-4 text-sm text-gray-400 mb-8 border-b border-gray-800 pb-8">
+                        <span><i class="fa-solid fa-eye mr-2"></i> 100 visualizaciones</span>
+                        <span><i class="fa-solid fa-clock mr-2"></i> Última actualización: Hoy</span>
+                    </div>
+                    
+                    <div class="prose prose-invert max-w-none">
+                        <p>Bienvenido al curso. Selecciona una lección del menú de la derecha para comenzar.</p>
+                        <h3>Recursos de la clase</h3>
+                        <div class="flex gap-4 not-prose mt-4">
+                            <a href="#" class="flex items-center gap-2 border border-gray-700 hover:bg-gray-800 px-4 py-2 rounded transition-colors">
+                                <i class="fa-solid fa-file-pdf text-red-500"></i> Diapositivas.pdf
+                            </a>
+                            <a href="#" class="flex items-center gap-2 border border-gray-700 hover:bg-gray-800 px-4 py-2 rounded transition-colors">
+                                <i class="fa-solid fa-code text-blue-500"></i> Código Fuente.zip
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <!-- Sidebar (Right) -->
+            <aside class="w-full md:w-80 lg:w-96 bg-navy-800 border-l border-navy-700 flex flex-col shrink-0 absolute md:relative right-0 h-full transform translate-x-full md:translate-x-0 transition-transform duration-300 z-10">
+                <div class="p-4 border-b border-navy-700 bg-navy-800">
+                    <h3 class="font-bold text-gray-200">Contenido del Curso</h3>
+                    <div class="w-full bg-navy-900 h-2 rounded-full mt-3 overflow-hidden">
+                        <div class="bg-brick-500 h-full w-1/12"></div>
+                    </div>
+                    <p class="text-xs text-gray-400 mt-1">8% completado</p>
+                </div>
+
+                <div class="flex-1 overflow-y-auto">
+                    {syllabus.map((module) => (
+                        <div class="border-b border-navy-700">
+                            <div class="px-4 py-3 bg-navy-850 font-semibold text-gray-300 text-sm sticky top-0 z-10 shadow-sm">
+                                {module.title}
+                            </div>
+                            <ul>
+                                {module.items.map((item) => (
+                                    <li>
+                                        <a href="#" class="block px-4 py-3 hover:bg-navy-700 transition-colors border-l-4 border-transparent hover:border-brick-500 class:list={[{'bg-navy-700 border-brick-500': lessonIndex === 1}]}">
+                                            <div class="flex gap-3">
+                                                <span class="text-gray-500 text-xs mt-1">{lessonIndex++}</span>
+                                                <div>
+                                                    <p class="text-sm text-gray-200 leading-snug">{item}</p>
+                                                    <span class="text-xs text-gray-500 mt-1 block">10:00 min</span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    ))}
+                </div>
+            </aside>
+        </div>
+    </div>
+</Layout>

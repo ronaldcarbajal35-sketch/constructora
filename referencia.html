@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Constructora Salcedo | Ingeniería y Capacitación</title>
+    <meta name="description"
+        content="Expertos en Construcción y Consultoría Especializada en Abancay. Ejecutamos obras y capacitamos ingenieros.">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            800: '#001f3f', // Primary Brand Color
+                            900: '#001226',
+                        },
+                        brick: {
+                            500: '#d35400', // Accent Color
+                            600: '#a04000',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800 antialiased">
+
+    <!-- Sticky Navigation -->
+    <nav class="sticky top-0 z-50 bg-navy-800 text-white shadow-lg transition-all duration-300">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="#" class="text-2xl font-bold tracking-wider flex items-center gap-2">
+                <i class="fa-solid fa-helmet-safety text-brick-500"></i>
+                <span>CONSTRUCTORA SALCEDO</span>
+            </a>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center space-x-8 font-medium">
+                <a href="#inicio" class="hover:text-brick-500 transition-colors">Inicio</a>
+                <a href="#servicios" class="hover:text-brick-500 transition-colors">Servicios de Obra</a>
+                <a href="#academia" class="hover:text-brick-500 transition-colors">Cursos & Capacitación</a>
+                <a href="#contacto" class="hover:text-brick-500 transition-colors">Contacto</a>
+            </div>
+
+            <!-- CTA Button -->
+            <a href="https://wa.me/51977715469" target="_blank"
+                class="hidden md:inline-flex items-center gap-2 bg-brick-500 hover:bg-brick-600 text-white px-5 py-2 rounded-full font-semibold transition-transform transform hover:scale-105 shadow-md">
+                <i class="fa-brands fa-whatsapp text-xl"></i>
+                WhatsApp Directo
+            </a>
+
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden text-2xl focus:outline-none">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="inicio" class="relative bg-navy-900 text-white py-20 lg:py-32 overflow-hidden">
+        <!-- Background Overlay/Image Placeholder -->
+        <div
+            class="absolute inset-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center">
+        </div>
+        <!-- <!-- TODO: Reemplazar la URL de arriba con una foto real de obra en Abancay --> -->
+
+        <div class="container mx-auto px-6 relative z-10 grid lg:grid-cols-2 gap-12 items-center">
+            <div class="space-y-6">
+                <div
+                    class="inline-block bg-brick-500 text-xs font-bold px-3 py-1 rounded uppercase tracking-widest mb-2">
+                    Ingeniería Sólida</div>
+                <h1 class="text-4xl lg:text-6xl font-extrabold leading-tight">
+                    Expertos en <span class="text-brick-500">Construcción</span> y Consultoría Especializada en Abancay
+                </h1>
+                <p class="text-lg text-gray-300 max-w-xl">
+                    Ejecutamos tu obra con garantía técnica y capacitamos a la próxima generación de ingenieros con
+                    estándares de calidad.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 pt-4">
+                    <a href="#contacto"
+                        class="bg-brick-500 hover:bg-brick-600 text-white px-8 py-4 rounded font-bold text-center transition-all shadow-lg hover:shadow-brick-500/30">
+                        Cotizar Construcción
+                    </a>
+                    <a href="#academia"
+                        class="border-2 border-white hover:bg-white hover:text-navy-900 text-white px-8 py-4 rounded font-bold text-center transition-all">
+                        Ver Cursos Disponibles
+                    </a>
+                </div>
+            </div>
+            <!-- Hero Image/Graphic -->
+            <div class="hidden lg:block relative">
+                <!-- Placeholder for Hero Image -->
+                <!-- <img src="path/to/hero-image.jpg" alt="Ingeniero en obra" class="rounded-lg shadow-2xl border-4 border-brick-500/30"> -->
+                <div class="bg-gray-800/50 backdrop-blur-sm p-8 rounded-xl border border-gray-700">
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="text-center p-4 bg-navy-800 rounded-lg">
+                            <i class="fa-solid fa-building text-3xl text-brick-500 mb-2"></i>
+                            <div class="font-bold text-2xl">10+</div>
+                            <div class="text-sm text-gray-400">Años de Experiencia</div>
+                        </div>
+                        <div class="text-center p-4 bg-navy-800 rounded-lg">
+                            <i class="fa-solid fa-graduation-cap text-3xl text-brick-500 mb-2"></i>
+                            <div class="font-bold text-2xl">500+</div>
+                            <div class="text-sm text-gray-400">Alumnos Capacitados</div>
+                        </div>
+                        <div class="text-center p-4 bg-navy-800 rounded-lg">
+                            <i class="fa-solid fa-hard-hat text-3xl text-brick-500 mb-2"></i>
+                            <div class="font-bold text-2xl">50+</div>
+                            <div class="text-sm text-gray-400">Obras Ejecutadas</div>
+                        </div>
+                        <div class="text-center p-4 bg-navy-800 rounded-lg">
+                            <i class="fa-solid fa-check-circle text-3xl text-brick-500 mb-2"></i>
+                            <div class="font-bold text-2xl">100%</div>
+                            <div class="text-sm text-gray-400">Garantía Técnica</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Services Section -->
+    <section id="servicios" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl lg:text-4xl font-bold text-navy-800 mb-4">Nuestros Servicios de Construcción</h2>
+                <p class="text-gray-600">Soluciones integrales adaptadas a la geografía y normativa de Abancay y
+                    Apurímac.</p>
+                <div class="w-24 h-1 bg-brick-500 mx-auto mt-6 rounded"></div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div
+                    class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow border-t-4 border-brick-500 group">
+                    <div
+                        class="w-16 h-16 bg-navy-50 rounded-full flex items-center justify-center mb-6 group-hover:bg-navy-800 transition-colors">
+                        <i class="fa-solid fa-city text-3xl text-navy-800 group-hover:text-white transition-colors"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-navy-800 mb-3">Construcción de Edificios</h3>
+                    <p class="text-gray-600 mb-4">
+                        Ejecución de obras civiles residenciales y comerciales. Especialistas en cimentaciones en suelos
+                        de pendiente y estructuras sismorresistentes.
+                    </p>
+                    <ul class="text-sm text-gray-500 space-y-2">
+                        <li><i class="fa-solid fa-check text-brick-500 mr-2"></i>Viviendas Unifamiliares</li>
+                        <li><i class="fa-solid fa-check text-brick-500 mr-2"></i>Edificios Multifamiliares</li>
+                        <li><i class="fa-solid fa-check text-brick-500 mr-2"></i>Locales Comerciales</li>
+                    </ul>
+                </div>
+
+                <!-- Service 2 -->
+                <div
+                    class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow border-t-4 border-navy-800 group">
+                    <div
+                        class="w-16 h-16 bg-navy-50 rounded-full flex items-center justify-center mb-6 group-hover:bg-navy-800 transition-colors">
+                        <i
+                            class="fa-solid fa-faucet-drip text-3xl text-navy-800 group-hover:text-white transition-colors"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-navy-800 mb-3">Saneamiento Físico-Legal</h3>
+                    <p class="text-gray-600 mb-4">
+                        Regularización de propiedades y proyectos de agua y desagüe. Gestionamos licencias y trámites
+                        municipales en Abancay.
+                    </p>
+                    <ul class="text-sm text-gray-500 space-y-2">
+                        <li><i class="fa-solid fa-check text-brick-500 mr-2"></i>Independización de Predios</li>
+                        <li><i class="fa-solid fa-check text-brick-500 mr-2"></i>Licencias de Construcción</li>
+                        <li><i class="fa-solid fa-check text-brick-500 mr-2"></i>Instalaciones Sanitarias</li>
+                    </ul>
+                </div>
+
+                <!-- Service 3 -->
+                <div
+                    class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow border-t-4 border-brick-500 group">
+                    <div
+                        class="w-16 h-16 bg-navy-50 rounded-full flex items-center justify-center mb-6 group-hover:bg-navy-800 transition-colors">
+                        <i
+                            class="fa-solid fa-file-contract text-3xl text-navy-800 group-hover:text-white transition-colors"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-navy-800 mb-3">Expedientes Técnicos</h3>
+                    <p class="text-gray-600 mb-4">
+                        Elaboración de expedientes para obras públicas y privadas. Metrados, presupuestos y cronogramas
+                        detallados.
+                    </p>
+                    <ul class="text-sm text-gray-500 space-y-2">
+                        <li><i class="fa-solid fa-check text-brick-500 mr-2"></i>Perfil Técnico</li>
+                        <li><i class="fa-solid fa-check text-brick-500 mr-2"></i>Valorizaciones de Obra</li>
+                        <li><i class="fa-solid fa-check text-brick-500 mr-2"></i>Supervisión Técnica</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Academy Section -->
+    <section id="academia" class="py-20 bg-navy-900 text-white relative">
+        <!-- Decorative Background Elements -->
+        <div class="absolute top-0 right-0 p-12 opacity-5">
+            <i class="fa-solid fa-drafting-compass text-9xl"></i>
+        </div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+                <div class="max-w-2xl">
+                    <span class="text-brick-500 font-bold tracking-wider uppercase mb-2 block">Academia de
+                        Ingeniería</span>
+                    <h2 class="text-3xl lg:text-4xl font-bold mb-4">Especialízate con Nosotros</h2>
+                    <p class="text-gray-300">Cursos prácticos dictados por ingenieros colegiados con experiencia en
+                        campo. Potencia tu perfil profesional.</p>
+                </div>
+                <a href="#"
+                    class="text-white border-b-2 border-brick-500 pb-1 hover:text-brick-500 transition-colors">Ver todos
+                    los cursos <i class="fa-solid fa-arrow-right ml-2"></i></a>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Course Card 1 -->
+                <div
+                    class="bg-navy-800 rounded-lg overflow-hidden shadow-lg hover:shadow-brick-500/20 transition-all hover:-translate-y-1 group border border-navy-700">
+                    <div class="h-40 bg-gray-700 relative overflow-hidden">
+                        <!-- <!-- TODO: Insertar imagen del curso --> -->
+                        <div class="absolute inset-0 bg-gradient-to-t from-navy-900 to-transparent opacity-80"></div>
+                        <div class="absolute bottom-4 left-4">
+                            <span class="bg-brick-500 text-xs font-bold px-2 py-1 rounded text-white">Ing. Civil</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-lg mb-2 leading-tight group-hover:text-brick-500 transition-colors">
+                            Residencia y Supervisión de Obras Públicas</h3>
+                        <p class="text-sm text-gray-400 mb-4">Normativa vigente, cuaderno de obra y control de calidad.
+                        </p>
+                        <button
+                            class="w-full py-2 border border-gray-600 rounded text-sm hover:bg-white hover:text-navy-900 transition-colors font-medium">Ver
+                            Temario</button>
+                    </div>
+                </div>
+
+                <!-- Course Card 2 -->
+                <div
+                    class="bg-navy-800 rounded-lg overflow-hidden shadow-lg hover:shadow-brick-500/20 transition-all hover:-translate-y-1 group border border-navy-700">
+                    <div class="h-40 bg-gray-700 relative overflow-hidden">
+                        <!-- <!-- TODO: Insertar imagen del curso --> -->
+                        <div class="absolute inset-0 bg-gradient-to-t from-navy-900 to-transparent opacity-80"></div>
+                        <div class="absolute bottom-4 left-4">
+                            <span class="bg-brick-500 text-xs font-bold px-2 py-1 rounded text-white">Ing. Civil</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-lg mb-2 leading-tight group-hover:text-brick-500 transition-colors">
+                            Lectura de Planos y Metrados</h3>
+                        <p class="text-sm text-gray-400 mb-4">Interpretación correcta de planos estructurales y
+                            arquitectónicos.</p>
+                        <button
+                            class="w-full py-2 border border-gray-600 rounded text-sm hover:bg-white hover:text-navy-900 transition-colors font-medium">Ver
+                            Temario</button>
+                    </div>
+                </div>
+
+                <!-- Course Card 3 -->
+                <div
+                    class="bg-navy-800 rounded-lg overflow-hidden shadow-lg hover:shadow-brick-500/20 transition-all hover:-translate-y-1 group border border-navy-700">
+                    <div class="h-40 bg-gray-700 relative overflow-hidden">
+                        <!-- <!-- TODO: Insertar imagen del curso --> -->
+                        <div class="absolute inset-0 bg-gradient-to-t from-navy-900 to-transparent opacity-80"></div>
+                        <div class="absolute bottom-4 left-4">
+                            <span class="bg-blue-600 text-xs font-bold px-2 py-1 rounded text-white">Sistemas</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-lg mb-2 leading-tight group-hover:text-brick-500 transition-colors">IA
+                            aplicada a la Ingeniería Civil</h3>
+                        <p class="text-sm text-gray-400 mb-4">Optimización de procesos y diseño generativo con
+                            herramientas de IA.</p>
+                        <button
+                            class="w-full py-2 border border-gray-600 rounded text-sm hover:bg-white hover:text-navy-900 transition-colors font-medium">Ver
+                            Temario</button>
+                    </div>
+                </div>
+
+                <!-- Course Card 4 -->
+                <div
+                    class="bg-navy-800 rounded-lg overflow-hidden shadow-lg hover:shadow-brick-500/20 transition-all hover:-translate-y-1 group border border-navy-700">
+                    <div class="h-40 bg-gray-700 relative overflow-hidden">
+                        <!-- <!-- TODO: Insertar imagen del curso --> -->
+                        <div class="absolute inset-0 bg-gradient-to-t from-navy-900 to-transparent opacity-80"></div>
+                        <div class="absolute bottom-4 left-4">
+                            <span class="bg-blue-600 text-xs font-bold px-2 py-1 rounded text-white">Gestión</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-lg mb-2 leading-tight group-hover:text-brick-500 transition-colors">
+                            Gestión de Proyectos con Ms Project</h3>
+                        <p class="text-sm text-gray-400 mb-4">Planificación, seguimiento y control de obras eficiente.
+                        </p>
+                        <button
+                            class="w-full py-2 border border-gray-600 rounded text-sm hover:bg-white hover:text-navy-900 transition-colors font-medium">Ver
+                            Temario</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col lg:flex-row gap-12 items-center">
+                <div class="lg:w-1/2">
+                    <!-- <!-- TODO: Insertar foto del equipo o gerente --> -->
+                    <div class="bg-gray-200 h-96 rounded-xl relative overflow-hidden shadow-xl">
+                        <div class="absolute inset-0 flex items-center justify-center text-gray-400">
+                            <i class="fa-solid fa-users text-6xl"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:w-1/2">
+                    <h2 class="text-3xl font-bold text-navy-800 mb-6">Sobre Nosotros</h2>
+                    <h3 class="text-xl font-semibold text-brick-500 mb-4">Constructora Salcedo e Ingenieros Consultores
+                        E.I.R.L.</h3>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        Somos una empresa abanquina dedicada a la ingeniería civil y consultoría, comprometida con el
+                        desarrollo de nuestra región. Combinamos la experiencia técnica en obras de envergadura con la
+                        pasión por la enseñanza, formando a los nuevos talentos del sector construcción.
+                    </p>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="flex items-start gap-3">
+                            <i class="fa-solid fa-medal text-brick-500 mt-1"></i>
+                            <div>
+                                <h4 class="font-bold text-navy-800">Calidad</h4>
+                                <p class="text-sm text-gray-500">Materiales y procesos certificados.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i class="fa-solid fa-clock text-brick-500 mt-1"></i>
+                            <div>
+                                <h4 class="font-bold text-navy-800">Puntualidad</h4>
+                                <p class="text-sm text-gray-500">Cumplimiento estricto de plazos.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contacto" class="bg-navy-900 text-white pt-16 pb-8 border-t border-navy-800">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+                <!-- Brand -->
+                <div>
+                    <div class="flex items-center gap-2 text-xl font-bold mb-6">
+                        <i class="fa-solid fa-helmet-safety text-brick-500"></i>
+                        <span>CONSTRUCTORA SALCEDO</span>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-6">
+                        Ingeniería sólida y capacitación de primer nivel en el corazón de Apurímac.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-navy-800 flex items-center justify-center hover:bg-brick-500 transition-colors"><i
+                                class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-navy-800 flex items-center justify-center hover:bg-brick-500 transition-colors"><i
+                                class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-navy-800 flex items-center justify-center hover:bg-brick-500 transition-colors"><i
+                                class="fa-brands fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-lg font-bold mb-6 border-b border-navy-800 pb-2 inline-block">Enlaces Rápidos</h4>
+                    <ul class="space-y-3 text-gray-400 text-sm">
+                        <li><a href="#inicio" class="hover:text-brick-500 transition-colors">Inicio</a></li>
+                        <li><a href="#servicios" class="hover:text-brick-500 transition-colors">Servicios de
+                                Construcción</a></li>
+                        <li><a href="#academia" class="hover:text-brick-500 transition-colors">Academia</a></li>
+                        <li><a href="#" class="hover:text-brick-500 transition-colors">Portal de Alumnos</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div>
+                    <h4 class="text-lg font-bold mb-6 border-b border-navy-800 pb-2 inline-block">Contacto</h4>
+                    <ul class="space-y-4 text-gray-400 text-sm">
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-location-dot text-brick-500 mt-1"></i>
+                            <span>Av. Principal 123, Abancay, Apurímac, Perú</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-phone text-brick-500"></i>
+                            <span>+51 999 999 999</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-envelope text-brick-500"></i>
+                            <span>contacto@constructorasalcedo.com</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- CTA -->
+                <div>
+                    <h4 class="text-lg font-bold mb-6 border-b border-navy-800 pb-2 inline-block">¿Tienes un proyecto?
+                    </h4>
+                    <p class="text-gray-400 text-sm mb-4">Escríbenos para una cotización gratuita.</p>
+                    <a href="https://wa.me/51999999999"
+                        class="block w-full bg-brick-500 hover:bg-brick-600 text-white text-center py-3 rounded font-bold transition-colors">
+                        <i class="fa-brands fa-whatsapp mr-2"></i> Chatear ahora
+                    </a>
+                </div>
+            </div>
+
+            <div class="border-t border-navy-800 pt-8 text-center text-gray-500 text-sm">
+                <p>&copy; 2025 Constructora Salcedo e Ingenieros Consultores E.I.R.L. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>

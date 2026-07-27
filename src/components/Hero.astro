@@ -1,0 +1,49 @@
+---
+// Hero section component
+---
+
+<header
+    id="inicio"
+    class="relative bg-navy-900 text-white py-20 lg:py-32 overflow-hidden"
+>
+    <!-- Background Overlay/Image Placeholder -->
+    <div
+        class="absolute inset-0 opacity-80 bg-[url('/images/hero-bg.png')] bg-cover bg-center"
+    >
+        <div class="absolute inset-0 bg-navy-900/40"></div>
+    </div>
+
+    <div
+        class="container mx-auto px-6 relative z-10 flex flex-col items-center text-center"
+    >
+        <div class="space-y-6 max-w-4xl">
+            <div
+                class="inline-block bg-brick-500 text-xs font-bold px-3 py-1 rounded uppercase tracking-widest mb-2"
+            >
+                Ingeniería Sólida
+            </div>
+            <h1 class="text-4xl lg:text-6xl font-extrabold leading-tight">
+                Expertos en <span class="text-brick-500">Construcción</span> y Consultoría
+                Especializada en Abancay
+            </h1>
+            <p class="text-lg text-gray-200 max-w-2xl mx-auto">
+                Ejecutamos tu obra con garantía técnica y capacitamos a la
+                próxima generación de ingenieros con estándares de calidad.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 pt-4 justify-center">
+                <a
+                    href="/#contacto"
+                    class="bg-brick-500 hover:bg-brick-600 text-white px-8 py-4 rounded font-bold text-center transition-all shadow-lg hover:shadow-brick-500/30"
+                >
+                    Cotizar Construcción
+                </a>
+                <a
+                    href="/#academia"
+                    class="border-2 border-white hover:bg-white hover:text-navy-900 text-white px-8 py-4 rounded font-bold text-center transition-all"
+                >
+                    Ver Cursos Disponibles
+                </a>
+            </div>
+        </div>
+    </div>
+</header>
