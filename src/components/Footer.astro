@@ -1,37 +1,42 @@
 ---
-// Footer component
+// Footer component - Software Engineering
 ---
 
 <footer
     id="contacto"
-    class="bg-navy-900 text-white pt-16 pb-8 border-t border-navy-800"
+    class="bg-navy-950 text-white pt-16 pb-8 border-t border-navy-800"
 >
     <div class="container mx-auto px-6">
         <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
             <!-- Brand -->
             <div>
-                <div class="flex items-center gap-2 text-xl font-bold mb-6">
-                    <img src="/images/logo.png" alt="Constructora Salcedo" class="h-16 w-auto" />
+                <div class="flex items-center gap-3 text-xl font-extrabold mb-6">
+                    <div class="w-10 h-10 rounded-lg bg-emerald-600 flex items-center justify-center text-white text-xl font-bold shadow-md">
+                        <i class="fa-solid fa-code"></i>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="leading-none text-lg">SALCEDO <span class="text-emerald-400">TECH</span></span>
+                        <span class="text-[10px] text-gray-400 font-normal tracking-widest uppercase">Software Engineering</span>
+                    </div>
                 </div>
-                <p class="text-gray-400 text-sm mb-6">
-                    Ingeniería sólida y capacitación de primer nivel en el
-                    corazón de Apurímac.
+                <p class="text-gray-400 text-sm mb-6 leading-relaxed">
+                    Ingeniería de software rigurosa, arquitectura cloud y desarrollo ágil a medida.
                 </p>
                 <div class="flex space-x-4">
                     <a
                         href="#"
-                        class="w-10 h-10 rounded-full bg-navy-800 flex items-center justify-center hover:bg-brick-500 transition-colors"
-                        ><i class="fa-brands fa-facebook-f"></i></a
+                        class="w-10 h-10 rounded-full bg-navy-800 flex items-center justify-center hover:bg-emerald-600 transition-colors"
+                        ><i class="fa-brands fa-github"></i></a
                     >
                     <a
                         href="#"
-                        class="w-10 h-10 rounded-full bg-navy-800 flex items-center justify-center hover:bg-brick-500 transition-colors"
+                        class="w-10 h-10 rounded-full bg-navy-800 flex items-center justify-center hover:bg-emerald-600 transition-colors"
                         ><i class="fa-brands fa-linkedin-in"></i></a
                     >
                     <a
                         href="#"
-                        class="w-10 h-10 rounded-full bg-navy-800 flex items-center justify-center hover:bg-brick-500 transition-colors"
-                        ><i class="fa-brands fa-instagram"></i></a
+                        class="w-10 h-10 rounded-full bg-navy-800 flex items-center justify-center hover:bg-emerald-600 transition-colors"
+                        ><i class="fa-brands fa-twitter"></i></a
                     >
                 </div>
             </div>
@@ -39,7 +44,7 @@
             <!-- Quick Links -->
             <div>
                 <h4
-                    class="text-lg font-bold mb-6 border-b border-navy-800 pb-2 inline-block"
+                    class="text-lg font-bold mb-6 border-b border-navy-800 pb-2 inline-block text-emerald-400"
                 >
                     Enlaces Rápidos
                 </h4>
@@ -47,26 +52,26 @@
                     <li>
                         <a
                             href="/#inicio"
-                            class="hover:text-brick-500 transition-colors"
+                            class="hover:text-emerald-400 transition-colors"
                             >Inicio</a>
                     </li>
                     <li>
                         <a
+                            href="/#metodologia"
+                            class="hover:text-emerald-400 transition-colors"
+                            >Metodología SDLC</a>
+                    </li>
+                    <li>
+                        <a
                             href="/#servicios"
-                            class="hover:text-brick-500 transition-colors"
-                            >Servicios de Construcción</a>
+                            class="hover:text-emerald-400 transition-colors"
+                            >Servicios de Software</a>
                     </li>
                     <li>
                         <a
                             href="/#academia"
-                            class="hover:text-brick-500 transition-colors"
-                            >Academia</a>
-                    </li>
-                    <li>
-                        <a
-                            href="#"
-                            class="hover:text-brick-500 transition-colors"
-                            >Portal de Alumnos</a>
+                            class="hover:text-emerald-400 transition-colors"
+                            >Academia Software</a>
                     </li>
                 </ul>
             </div>
@@ -74,23 +79,23 @@
             <!-- Contact -->
             <div>
                 <h4
-                    class="text-lg font-bold mb-6 border-b border-navy-800 pb-2 inline-block"
+                    class="text-lg font-bold mb-6 border-b border-navy-800 pb-2 inline-block text-emerald-400"
                 >
-                    Contacto
+                    Contacto & Soporte
                 </h4>
                 <ul class="space-y-4 text-gray-400 text-sm">
                     <li class="flex items-start gap-3">
-                        <i class="fa-solid fa-location-dot text-brick-500 mt-1"
+                        <i class="fa-solid fa-location-dot text-emerald-400 mt-1"
                         ></i>
-                        <span>Av. Principal 123, Abancay, Apurímac, Perú</span>
+                        <span>Abancay & Apurímac / Remoto Global</span>
                     </li>
                     <li class="flex items-center gap-3">
-                        <i class="fa-solid fa-phone text-brick-500"></i>
+                        <i class="fa-solid fa-phone text-emerald-400"></i>
                         <span>+51 977 715 469</span>
                     </li>
                     <li class="flex items-center gap-3">
-                        <i class="fa-solid fa-envelope text-brick-500"></i>
-                        <span>contacto@constructorasalcedo.com</span>
+                        <i class="fa-solid fa-envelope text-emerald-400"></i>
+                        <span>contacto@salcedotech.com</span>
                     </li>
                 </ul>
             </div>
@@ -98,18 +103,18 @@
             <!-- CTA -->
             <div>
                 <h4
-                    class="text-lg font-bold mb-6 border-b border-navy-800 pb-2 inline-block"
+                    class="text-lg font-bold mb-6 border-b border-navy-800 pb-2 inline-block text-emerald-400"
                 >
-                    ¿Tienes un proyecto?
+                    ¿Desarrollamos tu Software?
                 </h4>
                 <p class="text-gray-400 text-sm mb-4">
-                    Escríbenos para una cotización gratuita.
+                    Cotiza tu proyecto web, móvil o cloud con nuestro equipo técnico.
                 </p>
                 <a
                     href="https://wa.me/51977715469"
-                    class="block w-full bg-brick-500 hover:bg-brick-600 text-white text-center py-3 rounded font-bold transition-colors"
+                    class="block w-full bg-emerald-600 hover:bg-emerald-500 text-white text-center py-3 rounded font-bold transition-colors shadow-lg shadow-emerald-950"
                 >
-                    <i class="fa-brands fa-whatsapp mr-2"></i> Chatear ahora
+                    <i class="fa-brands fa-whatsapp mr-2"></i> Iniciar Proyecto por WhatsApp
                 </a>
             </div>
         </div>
@@ -118,8 +123,7 @@
             class="border-t border-navy-800 pt-8 text-center text-gray-500 text-sm"
         >
             <p>
-                &copy; 2025 Constructora Salcedo e Ingenieros Consultores
-                E.I.R.L. Todos los derechos reservados.
+                &copy; 2026 Salcedo Tech - Software Engineering & Digital Solutions. Todos los derechos reservados.
             </p>
         </div>
     </div>

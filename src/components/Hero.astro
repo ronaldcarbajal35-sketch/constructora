@@ -1,16 +1,16 @@
 ---
-// Hero section component
+// Hero section component - Software Engineering & Agile Methodology
 ---
 
 <header
     id="inicio"
-    class="relative bg-navy-900 text-white py-20 lg:py-32 overflow-hidden"
+    class="relative bg-navy-900 text-white py-24 lg:py-36 overflow-hidden"
 >
-    <!-- Background Overlay/Image Placeholder -->
+    <!-- Background Overlay/Image -->
     <div
-        class="absolute inset-0 opacity-80 bg-[url('/images/hero-bg.png')] bg-cover bg-center"
+        class="absolute inset-0 opacity-40 bg-[url('/images/hero-bg.png')] bg-cover bg-center"
     >
-        <div class="absolute inset-0 bg-navy-900/40"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-navy-900/90 via-navy-900/80 to-navy-900"></div>
     </div>
 
     <div
@@ -18,30 +18,54 @@
     >
         <div class="space-y-6 max-w-4xl">
             <div
-                class="inline-block bg-brick-500 text-xs font-bold px-3 py-1 rounded uppercase tracking-widest mb-2"
+                class="inline-flex items-center gap-2 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-widest mb-2"
             >
-                Ingeniería Sólida
+                <i class="fa-solid fa-code-branch"></i> Metodología de Desarrollo de Software
             </div>
             <h1 class="text-4xl lg:text-6xl font-extrabold leading-tight">
-                Expertos en <span class="text-brick-500">Construcción</span> y Consultoría
-                Especializada en Abancay
+                Ingeniería de Software & <span class="text-emerald-400">Desarrollo Ágil</span> a Medida
             </h1>
-            <p class="text-lg text-gray-200 max-w-2xl mx-auto">
-                Ejecutamos tu obra con garantía técnica y capacitamos a la
-                próxima generación de ingenieros con estándares de calidad.
+            <p class="text-lg lg:text-xl text-gray-300 max-w-3xl mx-auto font-light leading-relaxed">
+                Diseñamos, desarrollamos y escalamos soluciones digitales con arquitectura de software limpia (Clean Architecture), DevOps y estándares internacionales de calidad.
             </p>
+
+            <!-- Metrics Badges -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 max-w-2xl mx-auto py-4 text-left">
+                <div class="bg-navy-800/80 border border-navy-700 p-3 rounded-lg flex items-center gap-3">
+                    <i class="fa-solid fa-bolt text-emerald-400 text-xl"></i>
+                    <div>
+                        <p class="text-xs text-gray-400">Metodología</p>
+                        <p class="font-bold text-sm">Scrum & Kanban</p>
+                    </div>
+                </div>
+                <div class="bg-navy-800/80 border border-navy-700 p-3 rounded-lg flex items-center gap-3">
+                    <i class="fa-solid fa-shield-halved text-blue-400 text-xl"></i>
+                    <div>
+                        <p class="text-xs text-gray-400">Calidad</p>
+                        <p class="font-bold text-sm">Clean Architecture</p>
+                    </div>
+                </div>
+                <div class="bg-navy-800/80 border border-navy-700 p-3 rounded-lg flex items-center gap-3 col-span-2 sm:col-span-1">
+                    <i class="fa-solid fa-cloud text-indigo-400 text-xl"></i>
+                    <div>
+                        <p class="text-xs text-gray-400">Despliegue</p>
+                        <p class="font-bold text-sm">CI/CD & Cloud</p>
+                    </div>
+                </div>
+            </div>
+
             <div class="flex flex-col sm:flex-row gap-4 pt-4 justify-center">
                 <a
-                    href="/#contacto"
-                    class="bg-brick-500 hover:bg-brick-600 text-white px-8 py-4 rounded font-bold text-center transition-all shadow-lg hover:shadow-brick-500/30"
+                    href="#contacto"
+                    class="bg-emerald-600 hover:bg-emerald-500 text-white px-8 py-4 rounded-lg font-bold text-center transition-all shadow-lg hover:shadow-emerald-600/30 flex items-center justify-center gap-2"
                 >
-                    Cotizar Construcción
+                    <i class="fa-solid fa-rocket"></i> Cotizar Proyecto Software
                 </a>
                 <a
-                    href="/#academia"
-                    class="border-2 border-white hover:bg-white hover:text-navy-900 text-white px-8 py-4 rounded font-bold text-center transition-all"
+                    href="#metodologia"
+                    class="border border-gray-600 hover:border-emerald-400 hover:text-emerald-400 text-white px-8 py-4 rounded-lg font-bold text-center transition-all flex items-center justify-center gap-2"
                 >
-                    Ver Cursos Disponibles
+                    <i class="fa-solid fa-list-check"></i> Ver nuestra Metodología
                 </a>
             </div>
         </div>
