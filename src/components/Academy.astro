@@ -9,6 +9,7 @@ const categoryColors = { // Colors for badges
     civil: 'bg-brick-500',
     sistemas: 'bg-blue-600',
     minas: 'bg-yellow-600',
+    software: 'bg-emerald-600',
 };
 ---
 
@@ -31,8 +32,9 @@ const categoryColors = { // Colors for badges
             <!-- Filters -->
             <div class="flex flex-wrap gap-2" id="course-filters">
                 <button class="filter-btn active px-4 py-2 rounded-full border border-brick-500 bg-brick-500 text-white text-sm font-bold transition-all" data-filter="all">Todos</button>
+                <button class="filter-btn px-4 py-2 rounded-full border border-gray-600 hover:border-emerald-500 hover:text-emerald-500 text-gray-300 text-sm font-bold transition-all" data-filter="software">Software / Dev</button>
+                <button class="filter-btn px-4 py-2 rounded-full border border-gray-600 hover:border-blue-500 hover:text-blue-500 text-gray-300 text-sm font-bold transition-all" data-filter="sistemas">Sistemas / IA</button>
                 <button class="filter-btn px-4 py-2 rounded-full border border-gray-600 hover:border-brick-500 hover:text-brick-500 text-gray-300 text-sm font-bold transition-all" data-filter="civil">Civil</button>
-                <button class="filter-btn px-4 py-2 rounded-full border border-gray-600 hover:border-blue-500 hover:text-blue-500 text-gray-300 text-sm font-bold transition-all" data-filter="sistemas">Sistemas</button>
                 <button class="filter-btn px-4 py-2 rounded-full border border-gray-600 hover:border-yellow-500 hover:text-yellow-500 text-gray-300 text-sm font-bold transition-all" data-filter="minas">Minas</button>
             </div>
         </div>

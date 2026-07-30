@@ -6,7 +6,7 @@ const cursosCollection = defineCollection({
         title: z.string(),
         description: z.string(),
         price: z.number(),
-        category: z.enum(['civil', 'sistemas', 'minas']),
+        category: z.enum(['civil', 'sistemas', 'minas', 'software']),
         image: image(),
         instructor: z.object({
             name: z.string(),
