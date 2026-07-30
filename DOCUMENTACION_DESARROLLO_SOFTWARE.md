@@ -139,7 +139,87 @@ const cursosCollection = defineCollection({
 
 ---
 
-## 5. PROCEDIMIENTO DE IMPLEMENTACIÓN Y CÓDIGO FUENTE
+## 5. DISEÑO E INTEGRACIÓN DE BASE DE DATOS (POSTGRESQL / SUPABASE)
+
+### 5.1 Motor de Base de Datos Seleccionado
+Para el almacenamiento persistente de datos dinámicos (contactos, inscripciones, módulos y lecciones de cursos en video), el sistema integra **PostgreSQL** hospedado en la infraestructura cloud de **Supabase**.
+
+### 5.2 Modelo Relacional de Base de Datos (Script DDL - `database/schema.sql`)
+```sql
+-- 1. Tabla de Categorías
+CREATE TABLE categorias (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    nombre VARCHAR(50) NOT NULL UNIQUE,
+    slug VARCHAR(50) NOT NULL UNIQUE,
+    descripcion TEXT,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+-- 2. Tabla de Cursos
+CREATE TABLE cursos (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    categoria_id UUID REFERENCES categorias(id) ON DELETE SET NULL,
+    title VARCHAR(255) NOT NULL,
+    slug VARCHAR(255) NOT NULL UNIQUE,
+    description TEXT NOT NULL,
+    price DECIMAL(10, 2) NOT NULL DEFAULT 0.00,
+    image_url TEXT,
+    instructor_name VARCHAR(100) NOT NULL,
+    instructor_role VARCHAR(100) NOT NULL,
+    is_active BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+-- 3. Tabla de Módulos
+CREATE TABLE modulos (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    curso_id UUID NOT NULL REFERENCES cursos(id) ON DELETE CASCADE,
+    title VARCHAR(255) NOT NULL,
+    position INT NOT NULL DEFAULT 1,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+-- 4. Tabla de Lecciones / Video
+CREATE TABLE lecciones (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    modulo_id UUID NOT NULL REFERENCES modulos(id) ON DELETE CASCADE,
+    title VARCHAR(255) NOT NULL,
+    video_url TEXT NOT NULL,
+    duration_minutes INT DEFAULT 10,
+    resource_pdf_url TEXT,
+    resource_code_url TEXT,
+    position INT NOT NULL DEFAULT 1,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+-- 5. Tabla de Contactos y Cotizaciones
+CREATE TABLE contactos_cotizaciones (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    nombre_completo VARCHAR(150) NOT NULL,
+    email VARCHAR(150) NOT NULL,
+    telefono VARCHAR(50) NOT NULL,
+    tipo_servicio VARCHAR(100) NOT NULL,
+    mensaje TEXT,
+    estado VARCHAR(50) DEFAULT 'Pendiente',
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+```
+
+### 5.3 Conexión y Cliente Supabase (`src/lib/supabase.ts`)
+La conexión cliente con la base de datos se realiza mediante la librería `@supabase/supabase-js` utilizando variables de entorno protegidas:
+
+```typescript
+import { createClient } from '@supabase/supabase-js';
+
+const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL || 'https://tu-proyecto.supabase.co';
+const supabaseAnonKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY || 'tu-anon-key';
+
+export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+```
+
+---
+
+## 6. PROCEDIMIENTO DE IMPLEMENTACIÓN Y CÓDIGO FUENTE
 
 ### 5.1 Creación de Rutas Dinámicas (`src/pages/cursos/[slug].astro`)
 Astro utiliza la función `getStaticPaths()` para compilar estáticamente una página HTML por cada archivo Markdown presente en la colección:
