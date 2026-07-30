@@ -141,10 +141,69 @@ const cursosCollection = defineCollection({
 
 ## 5. DISEÑO E INTEGRACIÓN DE BASE DE DATOS (POSTGRESQL / SUPABASE)
 
-### 5.1 Motor de Base de Datos Seleccionado
-Para el almacenamiento persistente de datos dinámicos (contactos, inscripciones, módulos y lecciones de cursos en video), el sistema integra **PostgreSQL** hospedado en la infraestructura cloud de **Supabase**.
+### 5.2 Diagrama Entidad-Relación (DER / ERD)
 
-### 5.2 Modelo Relacional de Base de Datos (Script DDL - `database/schema.sql`)
+```mermaid
+erDiagram
+    CATEGORIAS ||--o{ CURSOS : "posee (1:N)"
+    CURSOS ||--o{ MODULOS : "contiene (1:N)"
+    MODULOS ||--o{ LECCIONES : "se divide en (1:N)"
+    
+    CATEGORIAS {
+        uuid id PK
+        string nombre
+        string slug
+        string descripcion
+        timestamp created_at
+    }
+
+    CURSOS {
+        uuid id PK
+        uuid categoria_id FK
+        string title
+        string slug
+        text description
+        decimal price
+        string image_url
+        string instructor_name
+        string instructor_role
+        boolean is_active
+        timestamp created_at
+    }
+
+    MODULOS {
+        uuid id PK
+        uuid curso_id FK
+        string title
+        int position
+        timestamp created_at
+    }
+
+    LECCIONES {
+        uuid id PK
+        uuid modulo_id FK
+        string title
+        string video_url
+        int duration_minutes
+        string resource_pdf_url
+        string resource_code_url
+        int position
+        timestamp created_at
+    }
+
+    CONTACTOS_COTIZACIONES {
+        uuid id PK
+        string nombre_completo
+        string email
+        string telefono
+        string tipo_servicio
+        text mensaje
+        string estado
+        timestamp created_at
+    }
+```
+
+### 5.3 Modelo Relacional de Base de Datos (Script DDL - `database/schema.sql`)
 ```sql
 -- 1. Tabla de Categorías
 CREATE TABLE categorias (
