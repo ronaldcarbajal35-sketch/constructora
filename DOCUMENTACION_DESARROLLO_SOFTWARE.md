@@ -127,76 +127,93 @@ Se aplicó la metodología **Scrum** dividida en 5 Sprints de desarrollo:
 
 ---
 
-## 5. ARQUITECTURA TÉCNICA, LÓGICA DE PROGRAMACIÓN Y EXPLICACIÓN DE CÓDIGO
+## 5. PROCESO DETALLADO DE DESARROLLO DE CÓDIGO Y TECNOLOGÍAS UTILIZADAS
 
-### 5.1 Estructura del Proyecto de Software
-```
-constructora/
-├── database/
-│   └── schema.sql              # Script DDL de 10 Tablas PostgreSQL / Supabase
-├── public/                     # Recursos estáticos (Logos, Imágenes, SVG)
-├── src/
-│   ├── components/             # Componentes UI Reutilizables
-│   │   ├── Navbar.astro        # Menú superior con navegación y CTAs
-│   │   ├── Hero.astro          # Encabezado institucional CSIC
-│   │   ├── Services.astro      # Módulo de servicios de ingeniería civil
-│   │   ├── Academy.astro       # Catálogo de cursos con filtro dinámico
-│   │   ├── About.astro         # Información corporativa
-│   │   └── Footer.astro        # Pie de página y enlaces
-│   ├── lib/
-│   │   └── supabase.ts         # Cliente de conexión a base de datos Supabase
-│   └── pages/                  # Enrutamiento basado en archivos
-│       ├── index.astro         # Página Principal CSIC
-│       ├── login.astro         # Módulo de Login
-│       ├── registro.astro      # Módulo de Registro
-│       ├── reservar.astro      # Módulo de Reserva de Citas
-│       ├── admin/
-│       │   └── reservas.astro  # APARTADO ADMINISTRATIVO DE GESTIÓN
-│       ├── cursos/[slug].astro # Detalle del Curso
-│       └── aula/[slug].astro   # Aula Virtual y Reproductor
-```
+### 5.1 Justificación de Lenguajes de Programación y Tecnologías Seleccionadas
 
-### 5.2 Explicación de la Lógica de Programación por Módulo
+Para el desarrollo del proyecto se seleccionó un ecosistema tecnológico de última generación basado en la arquitectura **Jamstack**:
 
-#### A. Lógica del Módulo de Reserva (`src/pages/reservar.astro`)
-- **Paso 1:** Captura la selección del tipo de servicio (radio button), ingeniero consultor CIP, fecha (validando que sea una fecha futura) y hora.
-- **Paso 2:** Genera un código de reserva único utilizando la función estocástica:
-  ```typescript
-  const codigoReserva = 'CSIC-' + Math.floor(100000 + Math.random() * 900000);
-  ```
-- **Paso 3:** Estructura el objeto de la reserva y lo persiste en la base de datos / almacenamiento local para la lectura del panel de administración:
-  ```typescript
-  const nuevaReserva = {
-      id: codigoReserva,
-      codigo: codigoReserva,
-      cliente: nombre,
-      telefono,
-      servicio,
-      ingeniero,
-      fecha,
-      hora,
-      estado: 'pendiente',
-      created_at: new Date().toLocaleString()
-  };
-  ```
+#### 1. TypeScript (Lenguaje de Programación Principal)
+- **¿Por qué se eligió?:** Se prefirió TypeScript sobre JavaScript puro debido a la necesidad de contar con **tipado estricto en tiempo de compilación** (`static type checking`).
+- **Beneficios en el proyecto:**
+  - Evita errores comunes en tiempo de ejecución como `undefined is not a function` o `cannot read property of null`.
+  - Permite definir modelos y contratos claros de datos mediante interfaces para las entidades `Reserva`, `Usuario`, `Curso` e `IngenieroCIP`.
+  - Facilita el autocompletado inteligente en el entorno de desarrollo (IDE), acelerando la velocidad de programación.
 
-#### B. Lógica del Panel de Administración y Gestión (`src/pages/admin/reservas.astro`)
-- **Renderizado Dinámico:** Obtiene las reservas y computa los indicadores estadísticos (`Total`, `Pendientes`, `Confirmadas`, `Atendida`):
-  ```typescript
-  document.getElementById('stat-total').innerText = reservas.length;
-  document.getElementById('stat-pendientes').innerText = reservas.filter(r => r.estado === 'pendiente').length;
-  ```
-- **Control de Estados en Tiempo Real:** Expone la función de actualización de estado que re-renderiza la tabla inmediatamente:
-  ```typescript
-  window.cambiarEstado = (id, nuevoEstado) => {
-      const reservas = obtenerReservas();
-      const index = reservas.findIndex(r => r.id === id);
-      if (index !== -1) {
-          reservas[index].estado = nuevoEstado;
-          guardarReservas(reservas);
-      }
-  };
-  ```
+#### 2. Astro v4 (Framework de Componentes Web & Rendering Engine)
+- **¿Por qué se eligió?:** Astro es el framework líder en rendimiento para sitios Jamstack debido a su arquitectura de **Islas de Componentes (Islands Architecture)**.
+- **Beneficios en el proyecto:**
+  - Genera archivos HTML y CSS estáticos compilados en el servidor (SSG), enviando **0 KB de JavaScript al navegador por defecto**.
+  - Utiliza la sintaxis de componentes `.astro` (una combinación elegante de Javascript/Typescript en el frontmatter `---` y marcado HTML semántico).
+  - Facilita el enrutamiento dinámico basado en archivos (`src/pages/`).
+
+#### 3. TailwindCSS (Framework CSS Basado en Clases Utilitarias)
+- **¿Por qué se eligió?:** Se seleccionó sobre CSS tradicional o Bootstrap debido a su velocidad de diseño y cero sobrecarga de especificidad CSS.
+- **Beneficios en el proyecto:**
+  - Permite construir interfaces responsivas nativas mediante prefijos directos (`hidden md:flex`, `grid md:grid-cols-3`).
+  - Facilita la creación del sistema de diseño institucional utilizando tokens de color corporativos (`bg-navy-900`, `text-brick-500`, `bg-emerald-500`).
+
+#### 4. PostgreSQL & Supabase (Lenguaje SQL DDL/DML & SGBD)
+- **¿Por qué se eligió?:** Se seleccionó un sistema relacional SQL (PostgreSQL) en lugar de NoSQL (MongoDB) debido a la **fuerte relación e integridad referencial** requerida entre usuarios, citas, servicios, ingenieros colegiados y pagos.
+- **Beneficios en el proyecto:**
+  - Soporte de claves primarias UUID, claves foráneas con reglas `ON DELETE CASCADE` e índices de rendimiento.
+  - Implementación de seguridad avanzada mediante Row Level Security (RLS).
+
+#### 5. Zod & Markdown (Colecciones de Contenido)
+- **¿Por qué se eligió?:** Para la gestión de cursos del aula virtual sin depender de un CMS externo costoso. Zod valida la estructura YAML de los archivos `.md` garantizando que ningún curso sea publicado sin su temario o precio completo.
+
+---
+
+### 5.2 Paso a Paso del Proceso de Desarrollo e Implementación del Código
+
+#### Paso 1: Inicialización del Entorno y Arquitectura Base
+1. Se ejecutó la inicialización del proyecto con el motor Astro v4:
+   ```bash
+   npx create-astro@latest constructora --template minimal
+   ```
+2. Se configuró TypeScript en modo estricto (`tsconfig.json`) y la integración de TailwindCSS (`tailwind.config.mjs`) para definir los tokens de colores institucional (`navy`, `brick`).
+
+#### Paso 2: Desarrollo de la Plantilla de Layout Base (`src/layouts/Layout.astro`)
+- Se programó la plantilla base HTML5 que envuelve a todas las páginas de la aplicación.
+- Se configuraron los meta-tags de SEO, tipografía de Google Fonts (*Inter*) e íconos de FontAwesome 6.
+
+#### Paso 3: Desarrollo de Componentes UI Reutilizables
+- **`src/components/Navbar.astro`:** Navegación pegajosa (`sticky top-0`) con menú colapsable para celulares y enlaces directos a `/reservar` y `/admin/reservas`.
+- **`src/components/Hero.astro`:** Encabezado con imagen de fondo, superposición oscura y botones de llamada a la acción (CTA).
+- **`src/components/Services.astro`:** Tarjetas informativas de los servicios de obras civiles, saneamiento y expedientes técnicos.
+- **`src/components/Academy.astro`:** Rejilla interactiva de cursos con filtro dinámico por categorías en cliente.
+- **`src/components/Footer.astro`:** Pie de página institucional con canales de atención por WhatsApp y dirección.
+
+#### Paso 4: Programación del Módulo de Autenticación de Usuarios
+- **`src/pages/registro.astro`:** Formulario de registro con captura de nombre, email, teléfono y contraseña. Al procesarse, valida los campos y notifica la creación exitosa de la cuenta.
+- **`src/pages/login.astro`:** Formulario de inicio de sesión que autentica las credenciales y persiste el objeto de sesión del usuario en el navegador (`localStorage.setItem('csic_user', ...)`).
+
+#### Paso 5: Programación del Módulo de Reserva de Consultas Técnicas (`src/pages/reservar.astro`)
+1. **Selección de Servicio:** Interfaz visual donde el cliente elige entre *Saneamiento Físico-Legal*, *Evaluación Estructural* o *Expedientes y Metrados*.
+2. **Selección de Ingeniero CIP:** Elección del consultor asignado (Ing. Marco Salcedo - CIP 184520 o Ing. Maria Lopez - CIP 209840).
+3. **Generador de Código de Ticket:** Lógica en JavaScript/TypeScript que computa la clave alfanumérica:
+   ```typescript
+   const codigoReserva = 'CSIC-' + Math.floor(100000 + Math.random() * 900000);
+   ```
+4. **Persistencia:** Almacenamiento estructurado de la cita con estado inicial `pendiente` para su procesamiento por la administración.
+
+#### Paso 6: Programación del Apartado Administrativo de Gestión (`src/pages/admin/reservas.astro`)
+1. **Renderizado de Tabla & Métricas:** Función en TypeScript que obtiene las citas y computa dinámicamente los indicadores superiores (`Total`, `Pendientes`, `Confirmadas`, `Atendidas`).
+2. **Filtrado en Tiempo Real:** Filtro reactivo mediante manipuladores de eventos `data-filter` que oculta o muestra filas en la tabla sin parpadear.
+3. **Manejador de Cambios de Estado:** Exposición de la función global `window.cambiarEstado(id, nuevoEstado)` que actualiza el estado de cualquier cita en la base de datos y refresca las estadísticas de la pantalla automáticamente.
+
+#### Paso 7: Programación del Motor de Cursos y Aula Virtual
+- **`src/content/config.ts`:** Definición del esquema Zod para validar título, precio, categoría, instructor y módulos.
+- **`src/pages/cursos/[slug].astro`:** Ruta dinámica que compila una página HTML para cada curso individual.
+- **`src/pages/aula/[slug].astro`:** Interfaz del Aula Virtual en modo oscuro con reproductor de video en alta definición, lista de lecciones y barra de progreso.
+
+#### Paso 8: Integración de Base de Datos SQL (`database/schema.sql` y `src/lib/supabase.ts`)
+- Escritura del script DDL en SQL para crear las **10 tablas relacionales** en PostgreSQL.
+- Programación del cliente oficial de Supabase (`createClient`) con variables de entorno protegidas (`.env.example`).
+
+#### Paso 9: Verificación de Calidad y Compilación
+- Ejecución de diagnósticos estáticos con `npx astro check` (0 errores encontrados).
+- Ejecución del proceso de build de producción con `npm run build` (19 páginas estáticas compiladas exitosamente).
 
 ---
 
@@ -323,18 +340,6 @@ erDiagram
         string estado
     }
 ```
-
-### 6.2 Resumen de las 10 Tablas del Sistema (`database/schema.sql`)
-1. `usuarios`: Cuentas de clientes, ingenieros y administradores.
-2. `categorias`: Categorías de ingeniería (Estructuras, Saneamiento, Geotecnia).
-3. `especialistas_ingenieros`: Registro de ingenieros consultores colegiados (CIP).
-4. `servicios_consultoria`: Catálogo de servicios técnicos y precios.
-5. `reservas_consultas`: Citas agendadas con fecha, hora, estado y código de reserva.
-6. `cursos`: Oferta educativa de la división académica CSIC.
-7. `modulos_curso`: Módulos temáticos de los cursos.
-8. `lecciones_curso`: Lecciones individuales en video y material descargable.
-9. `inscripciones_cursos`: Matrícula de alumnos en cursos.
-10. `pagos_transacciones`: Historial de transacciones comerciales.
 
 ---
 
