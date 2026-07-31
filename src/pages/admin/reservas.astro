@@ -1,0 +1,278 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Navbar from "../../components/Navbar.astro";
+import Footer from "../../components/Footer.astro";
+---
+
+<Layout 
+    title="Panel de Gestión de Reservas | CSIC Administrador" 
+    description="Modulo de gestión y control de citas y reservas para Constructora Salcedo e Ingenieros Consultores E.I.R.L. (CSIC)"
+>
+    <Navbar />
+
+    <div class="bg-navy-900 py-10 text-white border-b border-navy-800">
+        <div class="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div>
+                <span class="bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-2 inline-block">
+                    Módulo de Gestión de Citas & Reservas
+                </span>
+                <h1 class="text-3xl font-extrabold">Panel de Control CSIC</h1>
+                <p class="text-gray-300 text-sm">Administración centralizada de consultas técnicas solicitadas por clientes.</p>
+            </div>
+            
+            <a href="/reservar" class="bg-brick-500 hover:bg-brick-600 text-white px-5 py-2.5 rounded-lg text-sm font-bold shadow transition-all flex items-center gap-2">
+                <i class="fa-solid fa-plus"></i> Nueva Reserva Manual
+            </a>
+        </div>
+    </div>
+
+    <div class="py-12 bg-gray-50 min-h-[70vh]">
+        <div class="container mx-auto px-6">
+            <!-- Tarjetas de Estadísticas -->
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm">
+                    <div class="flex items-center justify-between text-gray-500 mb-2">
+                        <span class="text-xs font-bold uppercase">Total Citas</span>
+                        <i class="fa-solid fa-calendar-days text-navy-800 text-lg"></i>
+                    </div>
+                    <p class="text-2xl font-extrabold text-navy-900" id="stat-total">0</p>
+                </div>
+
+                <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm">
+                    <div class="flex items-center justify-between text-yellow-600 mb-2">
+                        <span class="text-xs font-bold uppercase">Pendientes</span>
+                        <i class="fa-solid fa-clock text-yellow-500 text-lg"></i>
+                    </div>
+                    <p class="text-2xl font-extrabold text-yellow-600" id="stat-pendientes">0</p>
+                </div>
+
+                <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm">
+                    <div class="flex items-center justify-between text-blue-600 mb-2">
+                        <span class="text-xs font-bold uppercase">Confirmadas</span>
+                        <i class="fa-solid fa-circle-check text-blue-500 text-lg"></i>
+                    </div>
+                    <p class="text-2xl font-extrabold text-blue-600" id="stat-confirmadas">0</p>
+                </div>
+
+                <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm">
+                    <div class="flex items-center justify-between text-green-600 mb-2">
+                        <span class="text-xs font-bold uppercase">Atendidas</span>
+                        <i class="fa-solid fa-user-check text-green-500 text-lg"></i>
+                    </div>
+                    <p class="text-2xl font-extrabold text-green-600" id="stat-atendidas">0</p>
+                </div>
+            </div>
+
+            <!-- Filtros de Estado -->
+            <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm mb-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+                <div class="flex flex-wrap gap-2" id="filter-container">
+                    <button class="btn-filter active px-4 py-2 rounded-lg text-xs font-bold bg-navy-900 text-white" data-filter="todas">
+                        Todas
+                    </button>
+                    <button class="btn-filter px-4 py-2 rounded-lg text-xs font-bold bg-gray-100 text-gray-700 hover:bg-gray-200" data-filter="pendiente">
+                        Pendientes
+                    </button>
+                    <button class="btn-filter px-4 py-2 rounded-lg text-xs font-bold bg-gray-100 text-gray-700 hover:bg-gray-200" data-filter="confirmada">
+                        Confirmadas
+                    </button>
+                    <button class="btn-filter px-4 py-2 rounded-lg text-xs font-bold bg-gray-100 text-gray-700 hover:bg-gray-200" data-filter="atendida">
+                        Atendidas
+                    </button>
+                    <button class="btn-filter px-4 py-2 rounded-lg text-xs font-bold bg-gray-100 text-gray-700 hover:bg-gray-200" data-filter="cancelada">
+                        Canceladas
+                    </button>
+                </div>
+
+                <button id="btn-reset-demo" class="text-xs text-brick-500 font-bold hover:underline">
+                    <i class="fa-solid fa-rotate-left mr-1"></i> Cargar Citas de Ejemplo
+                </button>
+            </div>
+
+            <!-- Tabla de Reservas -->
+            <div class="bg-white rounded-xl border border-gray-200 shadow-md overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-sm border-collapse">
+                        <thead>
+                            <tr class="bg-navy-900 text-white uppercase text-[11px] tracking-wider">
+                                <th class="p-4">Cód. Reserva</th>
+                                <th class="p-4">Cliente & Contacto</th>
+                                <th class="p-4">Servicio Técnico</th>
+                                <th class="p-4">Ingeniero Asignado</th>
+                                <th class="p-4">Fecha & Hora</th>
+                                <th class="p-4">Estado</th>
+                                <th class="p-4 text-center">Acción / Gestión</th>
+                            </tr>
+                        </thead>
+                        <tbody id="reservas-tbody" class="divide-y divide-gray-100 text-gray-700">
+                            <!-- Filas dinámicas -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="no-reservas" class="hidden p-12 text-center text-gray-400">
+                    <i class="fa-solid fa-folder-open text-4xl mb-3"></i>
+                    <p class="font-semibold text-gray-600">No hay reservas registradas en este estado.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <Footer />
+</Layout>
+
+<script>
+    // Datos iniciales de demostración
+    const citasDemo = [
+        {
+            id: 'CSIC-981240',
+            codigo: 'CSIC-981240',
+            cliente: 'Arq. Juan Carlos Mendoza',
+            telefono: '+51 984 123 456',
+            servicio: 'Saneamiento Físico-Legal',
+            ingeniero: 'Ing. Marco Salcedo (CIP 184520)',
+            fecha: '2026-08-01',
+            hora: '09:00 AM',
+            estado: 'pendiente',
+            notas: 'Solicita revisión de independización de predio urbano.',
+            created_at: '2026-07-31 09:30 AM'
+        },
+        {
+            id: 'CSIC-774129',
+            codigo: 'CSIC-774129',
+            cliente: 'Ing. Sofia Ramirez',
+            telefono: '+51 977 888 999',
+            servicio: 'Evaluación Estructural',
+            ingeniero: 'Ing. Marco Salcedo (CIP 184520)',
+            fecha: '2026-08-02',
+            hora: '11:00 AM',
+            estado: 'confirmada',
+            notas: 'Verificación de cimentación para edificio de 4 pisos.',
+            created_at: '2026-07-30 04:15 PM'
+        },
+        {
+            id: 'CSIC-331902',
+            codigo: 'CSIC-331902',
+            cliente: 'Carlos Fernandez',
+            telefono: '+51 983 222 111',
+            servicio: 'Expedientes y Metrados',
+            ingeniero: 'Ing. Maria Lopez (CIP 209840)',
+            fecha: '2026-07-29',
+            hora: '03:00 PM',
+            estado: 'atendida',
+            notas: 'Expediente entregado y valorización revisada.',
+            created_at: '2026-07-28 11:00 AM'
+        }
+    ];
+
+    function obtenerReservas() {
+        const almacenadas = localStorage.getItem('csic_reservas');
+        if (!almacenadas) {
+            localStorage.setItem('csic_reservas', JSON.stringify(citasDemo));
+            return citasDemo;
+        }
+        return JSON.parse(almacenadas);
+    }
+
+    function guardarReservas(lista: any[]) {
+        localStorage.setItem('csic_reservas', JSON.stringify(lista));
+        renderizarTabla(filtroActual);
+    }
+
+    let filtroActual = 'todas';
+
+    function renderizarTabla(filtro = 'todas') {
+        filtroActual = filtro;
+        const reservas = obtenerReservas();
+        const tbody = document.getElementById('reservas-tbody');
+        const noReservas = document.getElementById('no-reservas');
+
+        if (!tbody || !noReservas) return;
+
+        // Actualizar estadísticas
+        (document.getElementById('stat-total') as HTMLElement).innerText = reservas.length.toString();
+        (document.getElementById('stat-pendientes') as HTMLElement).innerText = reservas.filter((r: any) => r.estado === 'pendiente').length.toString();
+        (document.getElementById('stat-confirmadas') as HTMLElement).innerText = reservas.filter((r: any) => r.estado === 'confirmada').length.toString();
+        (document.getElementById('stat-atendidas') as HTMLElement).innerText = reservas.filter((r: any) => r.estado === 'atendida').length.toString();
+
+        const filtradas = reservas.filter((r: any) => filtro === 'todas' || r.estado === filtro);
+
+        if (filtradas.length === 0) {
+            tbody.innerHTML = '';
+            noReservas.classList.remove('hidden');
+            return;
+        }
+
+        noReservas.classList.add('hidden');
+
+        const badgesEstado: Record<string, string> = {
+            pendiente: 'bg-yellow-100 text-yellow-800 border-yellow-300',
+            confirmada: 'bg-blue-100 text-blue-800 border-blue-300',
+            atendida: 'bg-green-100 text-green-800 border-green-300',
+            cancelada: 'bg-red-100 text-red-800 border-red-300'
+        };
+
+        tbody.innerHTML = filtradas.map((item: any) => `
+            <tr class="hover:bg-gray-50/80 transition-colors">
+                <td class="p-4 font-mono font-bold text-navy-900">${item.codigo}</td>
+                <td class="p-4">
+                    <p class="font-bold text-navy-900">${item.cliente}</p>
+                    <p class="text-xs text-gray-500"><i class="fa-brands fa-whatsapp text-green-600 mr-1"></i>${item.telefono}</p>
+                </td>
+                <td class="p-4 font-semibold text-gray-800">${item.servicio}</td>
+                <td class="p-4 text-xs font-medium text-gray-600">${item.ingeniero}</td>
+                <td class="p-4">
+                    <p class="font-semibold text-gray-800">${item.fecha}</p>
+                    <p class="text-xs text-gray-500">${item.hora}</p>
+                </td>
+                <td class="p-4">
+                    <span class="px-2.5 py-1 rounded-full text-xs font-bold border ${badgesEstado[item.estado] || 'bg-gray-100'} uppercase">
+                        ${item.estado}
+                    </span>
+                </td>
+                <td class="p-4 text-center">
+                    <select onchange="window.cambiarEstado('${item.id}', this.value)" class="p-1.5 rounded border border-gray-300 text-xs outline-none bg-white font-semibold cursor-pointer">
+                        <option value="pendiente" ${item.estado === 'pendiente' ? 'selected' : ''}>Pendiente</option>
+                        <option value="confirmada" ${item.estado === 'confirmada' ? 'selected' : ''}>Confirmar</option>
+                        <option value="atendida" ${item.estado === 'atendida' ? 'selected' : ''}>Atendida</option>
+                        <option value="cancelada" ${item.estado === 'cancelada' ? 'selected' : ''}>Cancelar</option>
+                    </select>
+                </td>
+            </tr>
+        `).join('');
+    }
+
+    // Método global para actualizar estado
+    (window as any).cambiarEstado = (id: string, nuevoEstado: string) => {
+        const reservas = obtenerReservas();
+        const index = reservas.findIndex((r: any) => r.id === id);
+        if (index !== -1) {
+            reservas[index].estado = nuevoEstado;
+            guardarReservas(reservas);
+        }
+    };
+
+    // Eventos de Filtro
+    const filterBtns = document.querySelectorAll('.btn-filter');
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterBtns.forEach(b => {
+                b.classList.remove('bg-navy-900', 'text-white');
+                b.classList.add('bg-gray-100', 'text-gray-700');
+            });
+            btn.classList.remove('bg-gray-100', 'text-gray-700');
+            btn.classList.add('bg-navy-900', 'text-white');
+
+            const filterVal = btn.getAttribute('data-filter') || 'todas';
+            renderizarTabla(filterVal);
+        });
+    });
+
+    // Resetear demos
+    document.getElementById('btn-reset-demo')?.addEventListener('click', () => {
+        localStorage.setItem('csic_reservas', JSON.stringify(citasDemo));
+        renderizarTabla(filtroActual);
+    });
+
+    // Renderizado Inicial
+    renderizarTabla();
+</script>

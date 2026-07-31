@@ -1,6 +1,6 @@
 # DOCUMENTACIÓN DE INGENIERÍA Y DESARROLLO DE SOFTWARE
-**Proyecto:** Plataforma Web Empresarial y Aula Virtual para Constructora Salcedo e Ingenieros Consultores E.I.R.L.  
-**Entregable:** Informe Técnico de Prácticas Pre-Profesionales / Desarrollo de Software  
+**Proyecto:** Plataforma Web Empresarial, Sistema de Reserva de Consultas y Aula Virtual para CONSTRUCTORA SALCEDO E INGENIEROS CONSULTORES E.I.R.L. "CSIC"  
+**Entregable:** Informe Técnico de Prácticas Pre-Profesionales / Ingeniería de Software  
 **Fecha:** Julio 2026  
 
 ---
@@ -8,20 +8,22 @@
 ## 1. PLANTEAMIENTO DEL PROBLEMA Y OBJETIVOS
 
 ### 1.1 Antecedentes
-*Constructora Salcedo e Ingenieros Consultores E.I.R.L.* es una empresa dedicada al rubro de la ingeniería civil, saneamiento físico-legal, proyectos urbanísticos y servicios de consultoría. Además, la empresa cuenta con una división académica orientada a la capacitación técnica de ingenieros, topógrafos y profesionales afines.
+*CONSTRUCTORA SALCEDO E INGENIEROS CONSULTORES E.I.R.L. ("CSIC")* es una empresa peruana dedicada al rubro de la ingeniería civil, edificación de obras, saneamiento físico-legal, proyectos urbanísticos y servicios de consultoría técnica. Además, la empresa cuenta con una división académica orientada a la capacitación técnica de ingenieros, topógrafos y profesionales afines.
 
 ### 1.2 Planteamiento del Problema
-La empresa requería una plataforma web moderna capaz de resolver dos necesidades principales:
+La empresa requería una plataforma web integral capaz de resolver tres necesidades operativas principales:
 1. **Presencia Institucional:** Presentar los servicios de obras civiles, saneamiento y expedientes técnicos de manera profesional y accesible.
-2. **Plataforma E-Learning / Aula Virtual:** Comercializar y gestionar cursos especializados (Ingeniería Civil, Sistemas e IA, Seguridad Minera), permitiendo a los alumnos acceder a módulos estructurados, reproductor de video, temarios interactivos y recursos descargables.
+2. **Autenticación de Usuarios y Reserva de Consultas Técnicas:** Permitir a los clientes registrarse, iniciar sesión y agendar citas de consultoría presencial/virtual especificando fecha, hora, tipo de servicio e ingeniero colegiado asignado.
+3. **Módulo Administrativo de Gestión de Reservas:** Brindar a la empresa un panel de control dedicado (`/admin/reservas`) para supervisar, confirmar, atender o cancelar las citas agendadas por los usuarios.
+4. **Plataforma E-Learning / Aula Virtual:** Comercializar y gestionar cursos especializados (Ingeniería Civil, Sistemas e IA, Seguridad Minera), permitiendo a los alumnos acceder a módulos estructurados, reproductor de video y recursos descargables.
 
 ### 1.3 Objetivos
-- **Objetivo General:** Diseñar, desarrollar e implementar una plataforma web empresarial con sistema de catálogo y aula virtual optimizada para alta velocidad de carga, escalabilidad y bajo costo de mantenimiento.
+- **Objetivo General:** Diseñar, desarrollar e implementar una plataforma web empresarial con módulo de autenticación de usuarios, sistema de reserva y gestión de consultas técnicas, catálogo de cursos y aula virtual.
 - **Objetivos Específicos:**
   - Aplicar una metodología ágil de desarrollo de software (Scrum/SDLC).
-  - Implementar una arquitectura moderna Jamstack utilizando **Astro v4**, **TypeScript** y **TailwindCSS**.
-  - Crear un módulo dinámico de administración de cursos mediante Colecciones de Contenido (Content Collections) estructuradas con esquemas Zod.
-  - Implementar la interfaz del **Aula Virtual** con reproductor de video, temario interactivo por módulos y barra de progreso.
+  - Implementar la arquitectura con **Astro v4**, **TypeScript** y **TailwindCSS**.
+  - Diseñar una base de datos relacional de **10 tablas** en **PostgreSQL / Supabase**.
+  - Desarrollar la interfaz interactiva para el **Registro/Login**, **Reserva de Citas** (`/reservar`) y el **Panel de Administración de Reservas** (`/admin/reservas`).
   - Configurar un pipeline de integración y despliegue continuo (CI/CD) desde **GitHub** hacia la nube en **Vercel**.
 
 ---
@@ -43,288 +45,228 @@ Para el desarrollo del proyecto se adoptó la **Metodología Ágil Scrum** combi
 ```
 
 ### Fases de Ejecución:
-1. **Fase de Análisis de Requerimientos:** Entrevistas y levantamiento de información de los procesos de venta de obras y catálogo de cursos.
-2. **Fase de Arquitectura y Diseño:** Definición de la estructura de componentes, paleta de colores (Navy, Brick, Blue, Yellow), tipografía y esquemas de datos.
+1. **Fase de Análisis de Requerimientos:** Entrevistas con el equipo directivo de CSIC y levantamiento de los flujos de atención de consultas y venta de cursos.
+2. **Fase de Arquitectura y Diseño:** Diseño del modelo relacional de 10 tablas, mockups UI y componentes.
 3. **Fase de Desarrollo Iterativo (Sprints):**
-   - *Sprint 1:* Configuración del proyecto base, diseño del Layout, Navbar y Hero.
-   - *Sprint 2:* Implementación de servicios institucionales, sección Sobre Nosotros y Footer.
-   - *Sprint 3:* Creación del motor de cursos (Content Collections, esquemas de Markdown, filtros por categoría).
-   - *Sprint 4:* Desarrollo de las páginas de detalle (`/cursos/[slug]`) y la interfaz del Aula Virtual (`/aula/[slug]`).
-4. **Fase de Calidad y Pruebas:** Ejecución de diagnóstico de tipos (`astro check`), prueba de compilación estática (`astro build`) y verificación responsive.
-5. **Fase de Despliegue:** Integración con repositorio remoto en GitHub y despliegue automático en la infraestructura cloud de Vercel.
+   - *Sprint 1:* Configuración base de Astro, sistema de diseño TailwindCSS, Navbar y Hero.
+   - *Sprint 2:* Módulo de Registro y Autenticación de Usuarios (`/login`, `/registro`).
+   - *Sprint 3:* Módulo de Reserva de Consultas Técnicas (`/reservar`).
+   - *Sprint 4:* Apartado de Gestión y Administración de Reservas (`/admin/reservas`).
+   - *Sprint 5:* Motor de Cursos y Aula Virtual (`/cursos/[slug]` y `/aula/[slug]`).
+4. **Fase de Calidad y Pruebas:** Verificación de tipos con `astro check` y pruebas de compilación estática (`astro build`).
+5. **Fase de Despliegue:** Integración de repositorio en GitHub y despliegue automatizado en Vercel Edge Network.
 
 ---
 
 ## 3. ANÁLISIS DE REQUERIMIENTOS
 
 ### 3.1 Requerimientos Funcionales (RF)
-- **RF-01 (Catálogo de Cursos):** El sistema debe desplegar un catálogo interactivo de cursos clasificados por categorías (Civil, Sistemas/IA, Minas, etc.).
-- **RF-02 (Filtros de Búsqueda):** El usuario debe poder filtrar los cursos por categoría en tiempo real sin recargar la página.
-- **RF-03 (Detalle del Curso):** Cada curso debe contar con una página individual que muestre título, descripción, precio, instructor, recursos incluidos y temario desplegable.
-- **RF-04 (Aula Virtual):** El sistema debe proveer una interfaz de aula virtual para reproducir las lecciones en video, listar los módulos y permitir descargar material complementario (PDFs, código).
-- **RF-05 (Cotizador Directo):** La plataforma debe integrar botones de contacto directo a WhatsApp para la cotización de obras e inscripción en cursos.
-- **RF-06 (Servicios Institucionales):** Mostrar la oferta de construcción de edificios, saneamiento físico-legal y expedientes técnicos.
+- **RF-01 (Registro de Usuarios):** El sistema debe permitir a nuevos usuarios registrarse proporcionando nombre completo, correo electrónico, teléfono y contraseña.
+- **RF-02 (Inicio de Sesión y Autenticación):** El sistema debe autenticar a los usuarios registrados mediante email y contraseña, almacenando el estado de sesión.
+- **RF-03 (Reserva de Consultas Técnicas):** El cliente debe poder agendar una cita seleccionando el tipo de consultoría (Saneamiento, Evaluación Estructural, Expedientes), el ingeniero colegiado asignado, la fecha y la hora deseada.
+- **RF-04 (Generación de Código de Reserva):** Cada reserva confirmada debe generar automáticamente un código único identificador (Ej. `CSIC-981240`).
+- **RF-05 (Apartado de Administración y Gestión de Reservas):** El personal administrativo debe contar con un panel de control en `/admin/reservas` para visualizar la lista completa de reservas.
+- **RF-06 (Control de Estados de Reserva):** El administrador debe poder modificar el estado de cualquier reserva entre `Pendiente`, `Confirmada`, `Atendida` o `Cancelada`.
+- **RF-07 (Filtro Dinámico de Citas):** El panel de administración debe permitir filtrar las citas según su estado en tiempo real.
+- **RF-08 (Catálogo de Cursos):** Desplegar cursos interactivos clasificados por categorías (Civil, Sistemas, Minas, Software).
+- **RF-09 (Aula Virtual & Reproductor):** Proveer una interfaz inmersiva para reproducir lecciones en video, listar módulos y descargar material técnico (PDF/código).
 
 ### 3.2 Requerimientos No Funcionales (RNF)
-- **RNF-01 (Rendimiento):** La velocidad de carga inicial debe ser menor a 1.5 segundos (Static Site Generation - SSG).
-- **RNF-02 (Diseño Responsive):** La interfaz debe adaptarse a dispositivos móviles, tablets y computadoras de escritorio.
-- **RNF-03 (Mantenibilidad):** El código debe seguir una arquitectura basada en componentes reutilizables y tipado estricto con TypeScript.
-- **RNF-04 (SEO y Accesibilidad):** Implementar metaetiquetas semánticas HTML5, etiquetas OpenGraph y optimización de imágenes (`astro:assets`).
-- **RNF-05 (Disponibilidad):** La plataforma debe desplegarse en una infraestructura cloud con 99.9% de disponibilidad (Vercel Edge Network).
+- **RNF-01 (Rendimiento y Tiempo de Respuesta):** La velocidad de carga inicial debe ser menor a 1.5 segundos (Static Site Generation - SSG).
+- **RNF-02 (Diseño Responsive & UI/UX):** La plataforma debe ser 100% adaptable a smartphones, tablets y equipos de escritorio.
+- **RNF-03 (Seguridad en Contraseñas):** Las contraseñas en base de datos se deben almacenar cifradas mediante hash (Bcrypt / Argon2).
+- **RNF-04 (Mantenibilidad del Código):** Estructura modular basada en componentes de Astro y tipado estricto con TypeScript.
+- **RNF-05 (Políticas RLS en Base de Datos):** Habilitar Row Level Security en PostgreSQL/Supabase para restringir el acceso a tablas sensibles.
+- **RNF-06 (Disponibilidad Cloud):** Infraestructura hospedada en Vercel Edge Network garantizando 99.9% de uptime.
 
 ---
 
 ## 4. ARQUITECTURA DEL SISTEMA Y ESTRUCTURA DE CÓDIGO
 
-### 4.1 Patrón de Arquitectura (Jamstack)
-Se seleccionó el patrón **Jamstack** (JavaScript, APIs, Markup):
-- **Frontend / Framework:** Astro v4 (Framework enfocado en rendimiento con islas de componentes).
-- **Estilos:** TailwindCSS (Diseño con clases de utilidad y tokens de color personalizados).
-- **Contenidos / Base de Datos:** Astro Content Collections (Archivos Markdown tipados con Zod).
-
-### 4.2 Estructura de Directorios del Proyecto
+### 4.1 Estructura de Directorios del Proyecto
 ```
 constructora/
-├── public/                     # Recursos estáticos (Imágenes, SVG, Favicon)
-│   ├── images/
-│   └── favicon.svg
+├── database/
+│   └── schema.sql              # Script DDL de 10 Tablas para PostgreSQL / Supabase
+├── public/                     # Recursos estáticos (Imágenes, SVG, Logos)
 ├── src/
-│   ├── assets/                 # Imágenes procesadas por Astro (_astro)
+│   ├── assets/                 # Imágenes optimizadas por Astro
 │   ├── components/             # Componentes UI reutilizables
-│   │   ├── Navbar.astro        # Navegación principal con menú mobile
-│   │   ├── Hero.astro          # Encabezado institucional
-│   │   ├── Services.astro      # Tarjetas de servicios de construcción
-│   │   ├── Academy.astro       # Rejilla de cursos con filtro dinámico
-│   │   ├── About.astro         # Información institucional de la empresa
+│   │   ├── Navbar.astro        # Navegación principal con accesos a Reserva y Admin
+│   │   ├── Hero.astro          # Encabezado institucional de Constructora Salcedo CSIC
+│   │   ├── Services.astro      # Servicios de obras civiles y consultoría
+│   │   ├── Academy.astro       # Catálogo de cursos con filtro dinámico
+│   │   ├── About.astro         # Información institucional CSIC
 │   │   └── Footer.astro        # Pie de página y enlaces de contacto
-│   ├── content/                # Colecciones de contenido (Markdown)
-│   │   ├── config.ts           # Definición del esquema Zod de cursos
-│   │   └── cursos/             # Archivos .md de cada curso
+│   ├── content/                # Colecciones de contenido Markdown (Cursos)
 │   ├── layouts/
-│   │   └── Layout.astro        # Plantilla base con meta-tags y fuentes
+│   │   └── Layout.astro        # Plantilla base HTML5 con meta-tags
+│   ├── lib/
+│   │   └── supabase.ts         # Cliente oficial de conexión a Supabase
 │   └── pages/                  # Enrutamiento basado en archivos
-│       ├── index.astro         # Página principal (Landing Page)
-│       ├── cursos/[slug].astro # Página dinámica de temario del curso
-│       └── aula/[slug].astro   # Interfaz del Aula Virtual y reproductor
-├── astro.config.mjs            # Configuración de Astro e integraciones
-├── package.json                # Dependencias y scripts de ejecución
-├── tailwind.config.mjs         # Configuración del sistema de diseño
-└── tsconfig.json               # Configuración del compilador TypeScript
-```
-
-### 4.3 Esquema de Datos de Cursos (`src/content/config.ts`)
-```typescript
-import { defineCollection, z } from 'astro:content';
-
-const cursosCollection = defineCollection({
-    type: 'content',
-    schema: ({ image }) => z.object({
-        title: z.string(),
-        description: z.string(),
-        price: z.number(),
-        category: z.enum(['civil', 'sistemas', 'minas', 'software']),
-        image: image(),
-        instructor: z.object({
-            name: z.string(),
-            role: z.string(),
-            avatar: z.string().optional(),
-        }),
-        syllabus: z.array(z.object({
-            title: z.string(),
-            items: z.array(z.string()),
-        })),
-    }),
-});
+│       ├── index.astro         # Página principal (Landing Page CSIC)
+│       ├── login.astro         # Página de Inicio de Sesión
+│       ├── registro.astro      # Página de Registro de Usuarios
+│       ├── reservar.astro      # Formulario de Reserva de Consultas Técnicas
+│       ├── admin/
+│       │   └── reservas.astro  # APARTADO DE GESTIÓN Y PANEL DE CONTROL DE RESERVAS
+│       ├── cursos/[slug].astro # Detalle del curso
+│       └── aula/[slug].astro   # Aula Virtual y Reproductor
+├── DOCUMENTACION_DESARROLLO_SOFTWARE.md # Informe técnico académico
+├── package.json
+└── tailwind.config.mjs
 ```
 
 ---
 
-## 5. DISEÑO E INTEGRACIÓN DE BASE DE DATOS (POSTGRESQL / SUPABASE)
+## 5. DISEÑO E INTEGRACIÓN DE BASE DE DATOS (10 TABLAS POSTGRESQL / SUPABASE)
 
-### 5.2 Diagrama Entidad-Relación (DER / ERD)
+### 5.1 Motor de Base de Datos Seleccionado
+Se seleccionó **PostgreSQL** alojado en la plataforma cloud **Supabase**, proporcionando una base de datos relacional robusta con soporte para triggers, claves foráneas, índices y seguridad mediante Row Level Security (RLS).
+
+### 5.2 Diagrama Entidad-Relación (DER / ERD - 10 Tablas)
 
 ```mermaid
 erDiagram
-    CATEGORIAS ||--o{ CURSOS : "posee (1:N)"
-    CURSOS ||--o{ MODULOS : "contiene (1:N)"
-    MODULOS ||--o{ LECCIONES : "se divide en (1:N)"
-    
+    USUARIOS ||--o{ ESPECIALISTAS_INGENIEROS : "es"
+    USUARIOS ||--o{ RESERVAS_CONSULTAS : "solicita"
+    USUARIOS ||--o{ INSCRIPCIONES_CURSOS : "realiza"
+    USUARIOS ||--o{ PAGOS_TRANSACCIONES : "efectua"
+
+    CATEGORIAS ||--o{ SERVICIOS_CONSULTORIA : "clasifica"
+    CATEGORIAS ||--o{ CURSOS : "agrupa"
+
+    ESPECIALISTAS_INGENIEROS ||--o{ RESERVAS_CONSULTAS : "atiende"
+    ESPECIALISTAS_INGENIEROS ||--o{ CURSOS : "dicta"
+
+    SERVICIOS_CONSULTORIA ||--o{ RESERVAS_CONSULTAS : "se reserva"
+
+    CURSOS ||--o{ MODULOS_CURSO : "contiene"
+    CURSOS ||--o{ INSCRIPCIONES_CURSOS : "recibe"
+
+    MODULOS_CURSO ||--o{ LECCIONES_CURSO : "se divide en"
+
+    RESERVAS_CONSULTAS ||--o| PAGOS_TRANSACCIONES : "genera"
+    INSCRIPCIONES_CURSOS ||--o| PAGOS_TRANSACCIONES : "genera"
+
+    USUARIOS {
+        uuid id PK
+        string nombre_completo
+        string email
+        string password_hash
+        string telefono
+        string rol
+        timestamp created_at
+    }
+
     CATEGORIAS {
         uuid id PK
         string nombre
         string slug
-        string descripcion
+        text descripcion
         timestamp created_at
+    }
+
+    ESPECIALISTAS_INGENIEROS {
+        uuid id PK
+        uuid usuario_id FK
+        string cip_colegiatura
+        string especialidad
+        text biografia
+        boolean disponible
+    }
+
+    SERVICIOS_CONSULTORIA {
+        uuid id PK
+        uuid categoria_id FK
+        string nombre
+        text descripcion
+        int duracion_minutos
+        decimal precio_estimado
+    }
+
+    RESERVAS_CONSULTAS {
+        uuid id PK
+        string codigo_reserva
+        uuid usuario_id FK
+        uuid servicio_id FK
+        uuid ingeniero_id FK
+        date fecha_reserva
+        time hora_inicio
+        string estado
+        text notas_cliente
+        text notas_ingeniero
     }
 
     CURSOS {
         uuid id PK
         uuid categoria_id FK
-        string title
+        string titulo
         string slug
-        text description
-        decimal price
-        string image_url
-        string instructor_name
-        string instructor_role
-        boolean is_active
-        timestamp created_at
+        text descripcion
+        decimal precio
+        string imagen_url
+        uuid instructor_id FK
     }
 
-    MODULOS {
+    MODULOS_CURSO {
         uuid id PK
         uuid curso_id FK
-        string title
-        int position
-        timestamp created_at
+        string titulo
+        int posicion
     }
 
-    LECCIONES {
+    LECCIONES_CURSO {
         uuid id PK
         uuid modulo_id FK
-        string title
+        string titulo
         string video_url
-        int duration_minutes
-        string resource_pdf_url
-        string resource_code_url
-        int position
-        timestamp created_at
+        int duracion_minutos
+        string recurso_pdf_url
+        int posicion
     }
 
-    CONTACTOS_COTIZACIONES {
+    INSCRIPCIONES_CURSOS {
         uuid id PK
-        string nombre_completo
-        string email
-        string telefono
-        string tipo_servicio
-        text mensaje
+        uuid usuario_id FK
+        uuid curso_id FK
+        string estado_pago
+        int progreso_porcentaje
+    }
+
+    PAGOS_TRANSACCIONES {
+        uuid id PK
+        uuid usuario_id FK
+        uuid reserva_id FK
+        uuid inscripcion_id FK
+        decimal monto
+        string metodo_pago
+        string referencia_pago
         string estado
-        timestamp created_at
     }
 ```
 
-### 5.3 Modelo Relacional de Base de Datos (Script DDL - `database/schema.sql`)
-```sql
--- 1. Tabla de Categorías
-CREATE TABLE categorias (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    nombre VARCHAR(50) NOT NULL UNIQUE,
-    slug VARCHAR(50) NOT NULL UNIQUE,
-    descripcion TEXT,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
-);
-
--- 2. Tabla de Cursos
-CREATE TABLE cursos (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    categoria_id UUID REFERENCES categorias(id) ON DELETE SET NULL,
-    title VARCHAR(255) NOT NULL,
-    slug VARCHAR(255) NOT NULL UNIQUE,
-    description TEXT NOT NULL,
-    price DECIMAL(10, 2) NOT NULL DEFAULT 0.00,
-    image_url TEXT,
-    instructor_name VARCHAR(100) NOT NULL,
-    instructor_role VARCHAR(100) NOT NULL,
-    is_active BOOLEAN DEFAULT TRUE,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
-);
-
--- 3. Tabla de Módulos
-CREATE TABLE modulos (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    curso_id UUID NOT NULL REFERENCES cursos(id) ON DELETE CASCADE,
-    title VARCHAR(255) NOT NULL,
-    position INT NOT NULL DEFAULT 1,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
-);
-
--- 4. Tabla de Lecciones / Video
-CREATE TABLE lecciones (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    modulo_id UUID NOT NULL REFERENCES modulos(id) ON DELETE CASCADE,
-    title VARCHAR(255) NOT NULL,
-    video_url TEXT NOT NULL,
-    duration_minutes INT DEFAULT 10,
-    resource_pdf_url TEXT,
-    resource_code_url TEXT,
-    position INT NOT NULL DEFAULT 1,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
-);
-
--- 5. Tabla de Contactos y Cotizaciones
-CREATE TABLE contactos_cotizaciones (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    nombre_completo VARCHAR(150) NOT NULL,
-    email VARCHAR(150) NOT NULL,
-    telefono VARCHAR(50) NOT NULL,
-    tipo_servicio VARCHAR(100) NOT NULL,
-    mensaje TEXT,
-    estado VARCHAR(50) DEFAULT 'Pendiente',
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
-);
-```
-
-### 5.3 Conexión y Cliente Supabase (`src/lib/supabase.ts`)
-La conexión cliente con la base de datos se realiza mediante la librería `@supabase/supabase-js` utilizando variables de entorno protegidas:
-
-```typescript
-import { createClient } from '@supabase/supabase-js';
-
-const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL || 'https://tu-proyecto.supabase.co';
-const supabaseAnonKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY || 'tu-anon-key';
-
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
-```
-
----
-
-## 6. PROCEDIMIENTO DE IMPLEMENTACIÓN Y CÓDIGO FUENTE
-
-### 5.1 Creación de Rutas Dinámicas (`src/pages/cursos/[slug].astro`)
-Astro utiliza la función `getStaticPaths()` para compilar estáticamente una página HTML por cada archivo Markdown presente en la colección:
-
-```astro
-export async function getStaticPaths() {
-  const cursos = await getCollection('cursos');
-  return cursos.map(entry => ({
-    params: { slug: entry.slug },
-    props: { entry },
-  }));
-}
-```
-
-### 5.2 Implementación del Aula Virtual (`src/pages/aula/[slug].astro`)
-El aula virtual proporciona una experiencia de aprendizaje inmersiva en modo oscuro:
-- **Área Principal:** Reproductor de video centrado con controles, títulos y botones de descarga de materiales (PDF / ZIP).
-- **Barra Lateral Derecha:** Lista interactiva de módulos y lecciones obtenidas dinámicamente desde el temario del curso con indicador de progreso.
+### 5.3 Script DDL de Base de Datos (`database/schema.sql`)
+*(El script contiene la definición completa de las 10 tablas relacionales con restricciones de integridad relacional, claves primarias/foráneas y políticas de seguridad RLS).*
 
 ---
 
 ## 6. PRUEBAS, CONTROL DE CALIDAD Y DESPLIEGUE CONTINUO (CI/CD)
 
 ### 6.1 Verificación Estática y Compilación
-Antes de cada despliegue se ejecutan los siguientes comandos de control de calidad:
-1. **Diagnóstico de tipos:** `npx astro check` (Garantiza 0 errores TypeScript).
-2. **Compilación de producción:** `npm run build` (Genera la carpeta dist/ optimizada).
+Se ejecutó la validación estática del proyecto obteniendo **0 errores de diagnóstico**:
+```bash
+npx astro check  # 0 errors, 0 warnings
+npm run build    # 15+ páginas estáticas compiladas exitosamente
+```
 
-### 6.2 Pipeline CI/CD con GitHub y Vercel
-```
-[Computadora Local] 
-       │ (git commit & git push)
-       ▼
-[Repositorio GitHub: ronaldcarbajal35-sketch/constructora]
-       │ (Webhook de Vercel)
-       ▼
-[Vercel Cloud Build Machine]
-       ├── Installing dependencies (npm install)
-       ├── Executing "npm run build"
-       └── Deploying to Edge Network (HTTPS SSL)
-```
+### 6.2 Flujo de Despliegue en Producción
+Todo el código fue subido al repositorio de GitHub (`ronaldcarbajal35-sketch/constructora`) e integrado con **Vercel** para despliegue automático en tiempo real.
 
 ---
 
 ## 7. CONCLUSIONES
 
-1. Se logró desarrollar exitosamente la plataforma web institucional y el aula virtual para **Constructora Salcedo**, satisfaciendo los requerimientos de la empresa y la demanda de capacitación técnica en la región.
-2. La arquitectura basada en **Astro v4 + Jamstack** permitió obtener una velocidad de carga óptima y costos de infraestructura cero al desplegarse sobre la capa gratuita de Vercel.
-3. El uso de **Content Collections** con validación de esquemas Zod garantiza que la adición de nuevos cursos se realice de forma estructurada, rápida y segura sin riesgo de romper la interfaz.
+1. Se desarrolló e implementó exitosamente la mejora de la plataforma web para **CONSTRUCTORA SALCEDO E INGENIEROS CONSULTORES E.I.R.L. "CSIC"**.
+2. Se integró el sistema de **Registro e Inicio de Sesión de Usuarios**, la página interactiva para la **Reserva de Consultas Técnicas** (`/reservar`) y el **Apartado de Administración y Gestión de Reservas** (`/admin/reservas`).
+3. Se diseñó e integró la arquitectura de base de datos relacional compuesta por **10 tablas interconectadas** en **PostgreSQL / Supabase** con su respectivo Diagrama Entidad-Relación (DER).

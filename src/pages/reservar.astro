@@ -1,0 +1,217 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<Layout 
+    title="Reserva de Consultas Técnicas | Constructora Salcedo CSIC" 
+    description="Agenda una cita técnica o consultoría en ingeniería civil, estructuras y saneamiento con nuestros ingenieros colegiados."
+>
+    <Navbar />
+
+    <div class="bg-navy-950 py-12 text-white relative border-b border-navy-800">
+        <div class="container mx-auto px-6 relative z-10 text-center">
+            <span class="bg-brick-500/20 text-brick-500 border border-brick-500/30 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-3 inline-block">
+                Servicio Institucional CSIC
+            </span>
+            <h1 class="text-3xl lg:text-5xl font-extrabold mb-3">Reserva de Consultas Técnicas</h1>
+            <p class="text-gray-300 max-w-2xl mx-auto text-sm lg:text-base">
+                Agenda una cita personalizada con nuestros ingenieros consultores colegiados para asesoría en obras, estructuras, licencias y proyectos de ingeniería.
+            </p>
+        </div>
+    </div>
+
+    <div class="py-16 bg-gray-50">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 lg:p-12">
+                <form id="booking-form" class="space-y-8">
+                    <!-- Paso 1: Tipo de Servicio -->
+                    <div>
+                        <h2 class="text-xl font-bold text-navy-900 mb-4 flex items-center gap-2">
+                            <span class="w-8 h-8 rounded-full bg-brick-500 text-white text-sm flex items-center justify-center font-bold">1</span>
+                            Selecciona el Tipo de Consultoría Técnica
+                        </h2>
+                        <div class="grid md:grid-cols-3 gap-4">
+                            <label class="border-2 border-gray-200 hover:border-brick-500 rounded-xl p-4 cursor-pointer transition-all flex flex-col justify-between group">
+                                <input type="radio" name="servicio" value="Saneamiento Físico-Legal" checked class="accent-brick-500 mb-2" />
+                                <div>
+                                    <h3 class="font-bold text-navy-900 text-sm group-hover:text-brick-500">Saneamiento Físico-Legal</h3>
+                                    <p class="text-xs text-gray-500 mt-1">Licencias municipales, independizaciones y habilitaciones urbanas.</p>
+                                </div>
+                                <span class="text-xs font-bold text-brick-500 mt-3 block">S/ 150.00 (45 min)</span>
+                            </label>
+
+                            <label class="border-2 border-gray-200 hover:border-brick-500 rounded-xl p-4 cursor-pointer transition-all flex flex-col justify-between group">
+                                <input type="radio" name="servicio" value="Evaluación Estructural" class="accent-brick-500 mb-2" />
+                                <div>
+                                    <h3 class="font-bold text-navy-900 text-sm group-hover:text-brick-500">Evaluación Estructural</h3>
+                                    <p class="text-xs text-gray-500 mt-1">Inspección de cimentaciones, suelos y estructuras sismorresistentes.</p>
+                                </div>
+                                <span class="text-xs font-bold text-brick-500 mt-3 block">S/ 250.00 (60 min)</span>
+                            </label>
+
+                            <label class="border-2 border-gray-200 hover:border-brick-500 rounded-xl p-4 cursor-pointer transition-all flex flex-col justify-between group">
+                                <input type="radio" name="servicio" value="Expediente Técnico" class="accent-brick-500 mb-2" />
+                                <div>
+                                    <h3 class="font-bold text-navy-900 text-sm group-hover:text-brick-500">Expedientes y Metrados</h3>
+                                    <p class="text-xs text-gray-500 mt-1">Asesoría en valorización de obra, metrados y presupuestos de construcción.</p>
+                                </div>
+                                <span class="text-xs font-bold text-brick-500 mt-3 block">S/ 200.00 (60 min)</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Paso 2: Ingeniero Especialista -->
+                    <div>
+                        <h2 class="text-xl font-bold text-navy-900 mb-4 flex items-center gap-2">
+                            <span class="w-8 h-8 rounded-full bg-brick-500 text-white text-sm flex items-center justify-center font-bold">2</span>
+                            Selecciona al Ingeniero Consultor (CIP)
+                        </h2>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <label class="border border-gray-200 rounded-xl p-4 cursor-pointer flex items-center gap-4 hover:border-brick-500 transition-all">
+                                <input type="radio" name="ingeniero" value="Ing. Marco Salcedo (CIP 184520)" checked class="accent-brick-500" />
+                                <div class="w-12 h-12 rounded-full bg-navy-800 text-white flex items-center justify-center font-bold text-lg">
+                                    MS
+                                </div>
+                                <div>
+                                    <p class="font-bold text-navy-900 text-sm">Ing. Marco Salcedo</p>
+                                    <p class="text-xs text-brick-500 font-semibold">CIP 184520 - Espec. Obras & Estructuras</p>
+                                </div>
+                            </label>
+
+                            <label class="border border-gray-200 rounded-xl p-4 cursor-pointer flex items-center gap-4 hover:border-brick-500 transition-all">
+                                <input type="radio" name="ingeniero" value="Ing. Maria Lopez (CIP 209840)" class="accent-brick-500" />
+                                <div class="w-12 h-12 rounded-full bg-navy-800 text-white flex items-center justify-center font-bold text-lg">
+                                    ML
+                                </div>
+                                <div>
+                                    <p class="font-bold text-navy-900 text-sm">Ing. Maria Lopez</p>
+                                    <p class="text-xs text-brick-500 font-semibold">CIP 209840 - Espec. Saneamiento & Suelos</p>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Paso 3: Fecha, Hora y Datos -->
+                    <div>
+                        <h2 class="text-xl font-bold text-navy-900 mb-4 flex items-center gap-2">
+                            <span class="w-8 h-8 rounded-full bg-brick-500 text-white text-sm flex items-center justify-center font-bold">3</span>
+                            Fecha, Hora y Datos de Contacto
+                        </h2>
+                        
+                        <div class="grid md:grid-cols-2 gap-4 mb-4">
+                            <div>
+                                <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Fecha de la Consulta</label>
+                                <input type="date" id="res-fecha" required class="w-full p-3 border border-gray-300 rounded-lg text-sm outline-none focus:border-brick-500" />
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Hora Preferida</label>
+                                <select id="res-hora" required class="w-full p-3 border border-gray-300 rounded-lg text-sm outline-none focus:border-brick-500">
+                                    <option value="09:00 AM">09:00 AM - 10:00 AM</option>
+                                    <option value="11:00 AM">11:00 AM - 12:00 PM</option>
+                                    <option value="03:00 PM">03:00 PM - 04:00 PM</option>
+                                    <option value="05:00 PM">05:00 PM - 06:00 PM</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-4 mb-4">
+                            <div>
+                                <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Nombre Completo</label>
+                                <input type="text" id="res-nombre" required placeholder="Tu Nombre y Apellido" class="w-full p-3 border border-gray-300 rounded-lg text-sm outline-none focus:border-brick-500" />
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Teléfono / WhatsApp</label>
+                                <input type="tel" id="res-telefono" required placeholder="+51 977 715 469" class="w-full p-3 border border-gray-300 rounded-lg text-sm outline-none focus:border-brick-500" />
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Detalles o Notas de la Consulta (Opcional)</label>
+                            <textarea id="res-notas" rows="3" placeholder="Describe brevemente la ubicación del terreno, plano o consulta técnica que deseas realizar..." class="w-full p-3 border border-gray-300 rounded-lg text-sm outline-none focus:border-brick-500"></textarea>
+                        </div>
+                    </div>
+
+                    <button 
+                        type="submit" 
+                        class="w-full bg-brick-500 hover:bg-brick-600 text-white font-extrabold py-4 rounded-xl shadow-lg hover:shadow-brick-500/30 transition-all text-base flex items-center justify-center gap-3"
+                    >
+                        <i class="fa-solid fa-calendar-check text-xl"></i> Confirmar y Agendar Reserva
+                    </button>
+                </form>
+
+                <div id="booking-success" class="hidden mt-6 p-6 bg-green-50 border border-green-200 rounded-xl text-center">
+                    <div class="w-16 h-16 bg-green-500 text-white rounded-full flex items-center justify-center text-3xl mx-auto mb-3">
+                        <i class="fa-solid fa-check"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-green-900">¡Reserva Registrada Exitosamente!</h3>
+                    <p class="text-green-800 text-sm mt-1 mb-4" id="success-msg"></p>
+                    <div class="flex justify-center gap-4">
+                        <a href="/admin/reservas" class="bg-navy-900 text-white px-6 py-2.5 rounded-lg text-sm font-bold hover:bg-navy-800">
+                            Ver en Panel de Gestión CSIC
+                        </a>
+                        <a href="/" class="bg-gray-200 text-gray-800 px-6 py-2.5 rounded-lg text-sm font-bold hover:bg-gray-300">
+                            Volver al Inicio
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <Footer />
+</Layout>
+
+<script>
+    const form = document.getElementById('booking-form');
+    const successBox = document.getElementById('booking-success');
+    const successMsg = document.getElementById('success-msg');
+
+    if (form && successBox && successMsg) {
+        // Establecer fecha por defecto a mañana
+        const fechaInput = document.getElementById('res-fecha') as HTMLInputElement;
+        if (fechaInput) {
+            const manana = new Date();
+            manana.setDate(manana.getDate() + 1);
+            fechaInput.value = manana.toISOString().split('T')[0];
+        }
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const servicio = (document.querySelector('input[name="servicio"]:checked') as HTMLInputElement).value;
+            const ingeniero = (document.querySelector('input[name="ingeniero"]:checked') as HTMLInputElement).value;
+            const fecha = (document.getElementById('res-fecha') as HTMLInputElement).value;
+            const hora = (document.getElementById('res-hora') as HTMLSelectElement).value;
+            const nombre = (document.getElementById('res-nombre') as HTMLInputElement).value;
+            const telefono = (document.getElementById('res-telefono') as HTMLInputElement).value;
+            const notas = (document.getElementById('res-notas') as HTMLTextAreaElement).value;
+
+            const codigoReserva = 'CSIC-' + Math.floor(100000 + Math.random() * 900000);
+
+            // Guardar la nueva reserva en el almacenamiento local para el Panel Admin
+            const reservasExistentes = JSON.parse(localStorage.getItem('csic_reservas') || '[]');
+            const nuevaReserva = {
+                id: codigoReserva,
+                codigo: codigoReserva,
+                cliente: nombre,
+                telefono,
+                servicio,
+                ingeniero,
+                fecha,
+                hora,
+                estado: 'pendiente',
+                notas,
+                created_at: new Date().toLocaleString()
+            };
+
+            reservasExistentes.unshift(nuevaReserva);
+            localStorage.setItem('csic_reservas', JSON.stringify(reservasExistentes));
+
+            form.classList.add('hidden');
+            successBox.classList.remove('hidden');
+            successMsg.innerHTML = `Tu cita <strong>#${codigoReserva}</strong> para <strong>${servicio}</strong> ha sido registrada para el <strong>${fecha}</strong> a las <strong>${hora}</strong> con el <strong>${ingeniero}</strong>.`;
+        });
+    }
+</script>
