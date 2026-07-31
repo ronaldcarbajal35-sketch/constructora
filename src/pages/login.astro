@@ -66,11 +66,19 @@ import Footer from "../components/Footer.astro";
                 >
                     <i class="fa-solid fa-right-to-bracket"></i> Iniciar Sesión
                 </button>
+                <div class="pt-2">
+                    <a 
+                        href="/admin/reservas" 
+                        class="w-full bg-navy-900 hover:bg-navy-800 text-white font-bold py-3 rounded-lg text-sm text-center block transition-all shadow"
+                    >
+                        <i class="fa-solid fa-user-shield text-emerald-400 mr-2"></i> Acceso Directo: Ir al Panel Administrador
+                    </a>
+                </div>
             </form>
 
             <div id="login-alert" class="hidden mt-4 p-3 rounded-lg text-sm text-center"></div>
 
-            <div class="mt-8 pt-6 border-t border-gray-100 text-center text-sm text-gray-600">
+            <div class="mt-6 pt-4 border-t border-gray-100 text-center text-sm text-gray-600">
                 ¿Aún no tienes cuenta? 
                 <a href="/registro" class="text-brick-500 font-bold hover:underline">Regístrate aquí</a>
             </div>
@@ -88,17 +96,20 @@ import Footer from "../components/Footer.astro";
         form.addEventListener('submit', (e) => {
             e.preventDefault();
             const email = (document.getElementById('login-email') as HTMLInputElement).value;
-            
+            const esAdmin = email.toLowerCase().includes('admin') || email.toLowerCase().includes('salcedo');
+            const rol = esAdmin ? 'admin' : 'cliente';
+            const destino = esAdmin ? '/admin/reservas' : '/reservar';
+
             // Simulación de Login exitoso
             alert.classList.remove('hidden', 'bg-red-100', 'text-red-700');
             alert.classList.add('bg-green-100', 'text-green-800');
-            alert.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> ¡Bienvenido/a! Sesión iniciada correctamente como <strong>${email}</strong>. Redireccionando...`;
+            alert.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> ¡Bienvenido/a! Sesión iniciada como <strong>${esAdmin ? 'Administrador CSIC' : email}</strong>. Redireccionando al Panel Admin...`;
 
-            localStorage.setItem('csic_user', JSON.stringify({ email, rol: 'cliente' }));
+            localStorage.setItem('csic_user', JSON.stringify({ email, rol }));
 
             setTimeout(() => {
-                window.location.href = '/reservar';
-            }, 1500);
+                window.location.href = destino;
+            }, 1200);
         });
     }
 </script>
